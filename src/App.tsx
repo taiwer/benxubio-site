@@ -196,7 +196,7 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.12]"></div>
         
         {/* Glow continuation from Hero */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[300px] bg-[radial-gradient(ellipse_at_top,rgba(223,255,0,0.15)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[300px] bg-[radial-gradient(ellipse_at_top,rgba(249,168,38,0.15)_0%,transparent_70%)] pointer-events-none" />
         
         {/* Floating tech nodes for cohesion */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -336,7 +336,7 @@ const FloatingBioElements = () => {
               height: 110 + i * 40,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              backgroundImage: `linear-gradient(120deg, rgba(223,255,0,0.25), transparent)`,
+              backgroundImage: `linear-gradient(120deg, rgba(249,168,38,0.25), transparent)`,
               animationDelay: `${i}s`,
               animationDuration: `${25 + i * 5}s`
            }}
@@ -452,7 +452,7 @@ const DataMonitor = () => {
           <motion.div 
             animate={{ scaleX: progress / 100 }}
             style={{ transformOrigin: 'left' }}
-            className="w-full h-full bg-gradient-to-r from-accent to-sunrise shadow-[0_0_10px_rgba(223,255,0,0.5)]"
+            className="w-full h-full bg-gradient-to-r from-accent to-sunrise shadow-[0_0_10px_rgba(249,168,38,0.5)]"
           />
         </div>
       </div>
@@ -547,7 +547,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group"
             >
-               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.15) 0%, transparent 70%)' }}></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.15) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')]"></div>
                   <div className="absolute inset-0 bg-gradient-to-br from-sunrise/5 to-transparent"></div>
@@ -579,7 +579,7 @@ const ServicesPage = () => {
                       <Database className="text-sunrise w-16 h-16" />
                       <div 
                         className="absolute -inset-4 rounded-full -z-10 animate-glow-pulse"
-                        style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.6) 0%, transparent 70%)', animationDuration: '2s' }}
+                        style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.6) 0%, transparent 70%)', animationDuration: '2s' }}
                       />
                     </div>
                     <div className="flex gap-2">
@@ -629,7 +629,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group md:order-1"
             >
-               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.1) 0%, transparent 70%)' }}></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(23,215,160,0.1) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-accent/20 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-tr from-sunrise/20 to-transparent"></div>
                   
@@ -659,7 +659,7 @@ const ServicesPage = () => {
                     </div>
                     <div 
                       className="absolute top-0 w-6 h-6 rounded-full animate-float-simple"
-                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.8) 0%, transparent 70%)', animationDuration: '2s' }}
+                      style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.8) 0%, transparent 70%)', animationDuration: '2s' }}
                     />
                   </div>
                   
@@ -669,8 +669,8 @@ const ServicesPage = () => {
                      <Dna className="absolute inset-0 text-sunrise/10 w-full h-full" />
                   </div>
                   
-                  <div className="absolute top-6 left-8 w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 shadow-[0_0_15px_rgba(57,255,20,0.2)]">
-                    <Microscope className="text-accent w-10 h-10 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]" />
+                  <div className="absolute top-6 left-8 w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 shadow-[0_0_15px_rgba(23,215,160,0.2)]">
+                    <Microscope className="text-accent w-10 h-10 drop-shadow-[0_0_10px_rgba(23,215,160,0.5)]" />
                   </div>
                </div>
             </motion.div>
@@ -698,7 +698,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group"
             >
-               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-40" style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.1) 0%, transparent 70%)' }}></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-40" style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.1) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-sunrise/10 via-transparent to-transparent"></div>
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-[0.15]"></div>
@@ -731,7 +731,7 @@ const ServicesPage = () => {
                     <Globe className="text-sunrise w-28 h-28 animate-[spin_30s_linear_infinite]" />
                     <div 
                       className="absolute -inset-4 rounded-full -z-10 animate-breathe"
-                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.3) 0%, transparent 70%)', animationDuration: '2s' }}
+                      style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.3) 0%, transparent 70%)', animationDuration: '2s' }}
                     />
                   </div>
                </div>
@@ -814,7 +814,7 @@ const AboutPage = () => {
               <div 
                 className="lg:w-1/2 w-full relative"
               >
-                 <div className="absolute -inset-10 rounded-full" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.05) 0%, transparent 70%)' }}></div>
+                 <div className="absolute -inset-10 rounded-full" style={{ background: 'radial-gradient(circle, rgba(23,215,160,0.05) 0%, transparent 70%)' }}></div>
                  <div className="grid grid-cols-2 gap-4 relative z-10">
                     <div 
                       className="aspect-square bg-accent/5 border border-accent/20 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden group hover:scale-105 transition-transform"
@@ -827,7 +827,7 @@ const AboutPage = () => {
                     <div 
                       className="aspect-square bg-gradient-to-br from-accent/40 to-transparent border border-accent/30 rounded-3xl flex items-center justify-center p-6 text-primary font-bold text-3xl leading-tight relative overflow-hidden hover:scale-105 transition-transform bg-primary"
                     >
-                       <div className="absolute right-0 top-0 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.3) 0%, transparent 70%)' }}></div>
+                       <div className="absolute right-0 top-0 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(23,215,160,0.3) 0%, transparent 70%)' }}></div>
                        <span className="text-white relative z-10 drop-shadow-md">生信分析<br/>核心链</span>
                     </div>
                     

@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #021B15;
-  --color-accent: #39FF14;
-  --color-sunrise: #DFFF00;
-  --color-dark: #010D0A;
-  --color-emerald-deep: #064e3b;
+  --color-primary: #0A241F;
+  --color-accent: #17D7A0;
+  --color-sunrise: #F9A826;
+  --color-dark: #040F0D;
+  --color-emerald-deep: #0D5C4A;
 }
 
 @layer base {
   body {
     @apply text-white font-sans antialiased min-h-screen relative overflow-x-hidden;
-    background: radial-gradient(circle at 50% 120%, #064e3b 0%, #021B15 50%, #010D0A 100%);
+    background: radial-gradient(circle at 50% 120%, #0D5C4A 0%, #0A241F 50%, #040F0D 100%);
   }
 }
 
@@ -79,11 +79,11 @@
 }
 
 .glow-text-sunrise {
-  text-shadow: 0 0 20px rgba(223, 255, 0, 0.4);
+  text-shadow: 0 0 20px rgba(249, 168, 38, 0.4);
 }
 
 .glow-border-sunrise {
-  box-shadow: 0 0 15px rgba(223, 255, 0, 0.15);
+  box-shadow: 0 0 15px rgba(249, 168, 38, 0.15);
 }
 
 .sunrise-gradient {
@@ -91,7 +91,7 @@
 }
 
 .sunrise-glow-radial {
-  background: radial-gradient(circle, rgba(223, 255, 0, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(249, 168, 38, 0.15) 0%, transparent 70%);
 }
 
 .glass-panel {
