@@ -152,11 +152,14 @@ export const BenxuParticleText: React.FC = () => {
       lastChangeTime = Date.now();
     };
 
+    let canvasRect = { left: 0, top: 0, width: 0, height: 0 };
+
     const handleResize = () => {
        const parent = canvas.parentElement;
        if (parent) {
          canvas.width = parent.clientWidth;
          canvas.height = parent.clientHeight || 200;
+         canvasRect = canvas.getBoundingClientRect();
          init();
        }
     };
@@ -190,9 +193,8 @@ export const BenxuParticleText: React.FC = () => {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      mouse.x = e.offsetX;
+      mouse.y = e.offsetY;
     };
     
     const handleMouseLeave = () => {

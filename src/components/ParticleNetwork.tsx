@@ -104,10 +104,7 @@ export const ParticleNetwork: React.FC = () => {
         if (!ctx) return;
         ctx.font = `bold ${this.size}px monospace`;
         ctx.fillStyle = this.isSunrise ? `rgba(223, 255, 0, ${this.alpha})` : `rgba(57, 255, 20, ${this.alpha})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = this.isSunrise ? '#DFFF00' : '#39FF14';
         ctx.fillText(this.char, this.x, this.y);
-        ctx.shadowBlur = 0;
       }
     }
 
@@ -159,11 +156,16 @@ export const ParticleNetwork: React.FC = () => {
         renderQueue.push({
           z: z1,
           draw: () => {
+            // Glow layer
+            ctx.beginPath();
+            ctx.arc(x1, y, size1 * 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(57, 255, 20, ${alpha1 * 0.2})`;
+            ctx.fill();
+            
+            // Base layer
             ctx.beginPath();
             ctx.arc(x1, y, size1, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(57, 255, 20, ${alpha1})`;
-            ctx.shadowBlur = 15 * alpha1;
-            ctx.shadowColor = '#39FF14';
             ctx.fill();
             // Core bright dot for depth
             ctx.beginPath();
@@ -179,11 +181,16 @@ export const ParticleNetwork: React.FC = () => {
         renderQueue.push({
           z: z2,
           draw: () => {
+            // Glow layer
+            ctx.beginPath();
+            ctx.arc(x2, y, size2 * 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(223, 255, 0, ${alpha2 * 0.2})`;
+            ctx.fill();
+
+            // Base layer
             ctx.beginPath();
             ctx.arc(x2, y, size2, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(223, 255, 0, ${alpha2})`;
-            ctx.shadowBlur = 15 * alpha2;
-            ctx.shadowColor = '#DFFF00';
             ctx.fill();
             // Core bright dot for depth
             ctx.beginPath();
@@ -267,5 +274,5 @@ export const ParticleNetwork: React.FC = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none opacity-80" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none opacity-80" style={{ willChange: 'transform' }} />;
 };

@@ -13,7 +13,7 @@ const Navbar = ({ currentPage, setPage }: { currentPage: Page, setPage: (p: Page
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-primary/80 backdrop-blur-md border-b border-emerald-900/30">
+    <nav className="fixed top-0 w-full z-50 bg-primary/95 border-b border-emerald-900/30">
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
         <div className="flex justify-between h-24 items-center">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setPage('home')}>
@@ -87,7 +87,7 @@ const MobileNavLink = ({ children, active, onClick }: { children: React.ReactNod
 );
 
 const Footer = () => (
-  <footer className="relative bg-primary/40 backdrop-blur-xl border-t border-emerald-900/30 pt-20 pb-10">
+  <footer className="relative bg-primary/90 border-t border-emerald-900/30 pt-20 pb-10">
     <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
         <div className="col-span-1 md:col-span-2">
@@ -186,10 +186,8 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         {/* Animated indicators */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
            <span className="text-xs text-accent uppercase tracking-widest">Scroll to explore</span>
-           <motion.div 
-             animate={{ y: [0, 10, 0] }}
-             transition={{ repeat: Infinity, duration: 2 }}
-             className="w-0.5 h-10 bg-gradient-to-b from-accent to-transparent" 
+           <div 
+             className="w-0.5 h-10 bg-gradient-to-b from-accent to-transparent animate-float-simple relative" 
            />
         </div>
       </section>
@@ -293,76 +291,47 @@ const FloatingBioElements = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {[...Array(5)].map((_, i) => (
-        <motion.div
+        <div
            key={`dna-${i}`}
-           className="absolute text-accent/60"
+           className="absolute text-accent/60 animate-float-dna"
            style={{
               left: `${10 + Math.random() * 80}%`,
               top: `${Math.random() * 100}%`,
-              willChange: "transform, opacity"
-           }}
-           animate={{
-              y: [0, -100, 0],
-              rotate: [0, 180, 360],
-              opacity: [0.4, 1, 0.4]
-           }}
-           transition={{
-              duration: 30 + Math.random() * 20,
-              repeat: Infinity,
-              ease: "linear",
-              delay: Math.random() * 10
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${30 + Math.random() * 20}s`
            }}
         >
           <Dna size={120 + Math.random() * 200} />
-        </motion.div>
+        </div>
       ))}
       {[...Array(6)].map((_, i) => (
-        <motion.div
+        <div
            key={`hex-${i}`}
-           className="absolute border border-sunrise/60 rounded-xl"
+           className="absolute border border-sunrise/60 rounded-xl animate-float-hex"
            style={{
               width: 100 + i * 40,
               height: 110 + i * 40,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               backgroundImage: `linear-gradient(120deg, rgba(223,255,0,0.25), transparent)`,
-              willChange: "transform, opacity"
-           }}
-           animate={{
-              y: [0, 80, 0],
-              x: [0, 40, 0],
-              rotate: [0, 90, 180],
-              opacity: [0.5, 1, 0.5]
-           }}
-           transition={{
-              duration: 25 + i * 5,
-              repeat: Infinity,
-              ease: "easeInOut"
+              animationDelay: `${i}s`,
+              animationDuration: `${25 + i * 5}s`
            }}
         />
       ))}
       {[...Array(4)].map((_, i) => (
-        <motion.div
+        <div
            key={`flask-${i}`}
-           className="absolute text-accent/60"
+           className="absolute text-accent/60 animate-float-flask"
            style={{
               left: `${20 + Math.random() * 60}%`,
               top: `${Math.random() * 100}%`,
-              willChange: "transform, opacity"
-           }}
-           animate={{
-              y: [0, 150, 0],
-              rotate: [-15, 15, -15],
-              opacity: [0.4, 0.9, 0.4]
-           }}
-           transition={{
-              duration: 35 + Math.random() * 15,
-              repeat: Infinity,
-              ease: "easeInOut",
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${35 + Math.random() * 15}s`
            }}
         >
            <FlaskConical size={80 + Math.random() * 100} />
-        </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -458,8 +427,9 @@ const DataMonitor = () => {
         </div>
         <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
           <motion.div 
-            animate={{ width: `${progress}%` }}
-            className="h-full bg-gradient-to-r from-accent to-sunrise shadow-[0_0_10px_rgba(223,255,0,0.5)]"
+            animate={{ scaleX: progress / 100 }}
+            style={{ transformOrigin: 'left' }}
+            className="w-full h-full bg-gradient-to-r from-accent to-sunrise shadow-[0_0_10px_rgba(223,255,0,0.5)]"
           />
         </div>
       </div>
@@ -524,42 +494,39 @@ const ServicesPage = () => {
                   {/* Digital Rain / Data Stream Effect */}
                   {[...Array(15)].map((_, i) => (
                     <div key={`stream-${i}`} className="absolute top-0 w-[1px] h-full" style={{ left: `${(i / 15) * 100}%` }}>
-                      <motion.div
-                        animate={{ y: [-100, 400] }}
-                        transition={{ repeat: Infinity, duration: 1.5 + Math.random() * 2, delay: Math.random() * 2, ease: "linear" }}
-                        className="w-full h-16 bg-gradient-to-b from-transparent via-sunrise to-transparent opacity-60"
+                      <div
+                        className="w-full h-16 bg-gradient-to-b from-transparent via-sunrise to-transparent opacity-60 animate-flash-scan"
+                        style={{
+                           animationDelay: `${Math.random() * 2}s`,
+                           animationDuration: `${1.5 + Math.random() * 2}s`
+                        }}
                       />
                     </div>
                   ))}
 
                   {/* Circular Radar Scan */}
                   <div className="absolute w-[180px] h-[180px] rounded-full border border-sunrise/10 overflow-hidden">
-                      <motion.div 
-                         animate={{ rotate: 360 }}
-                         transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-                         style={{ transformOrigin: 'bottom right' }}
-                         className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-sunrise/20 to-transparent"
+                      <div 
+                         style={{ transformOrigin: 'bottom right', animationDuration: '3s' }}
+                         className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-sunrise/20 to-transparent animate-orbit"
                       />
                   </div>
                   <div className="absolute w-[240px] h-[240px] rounded-full border border-dashed border-sunrise/20 animate-[spin_20s_linear_infinite]" />
 
-                  <div className="relative flex flex-col items-center z-10 bg-dark/60 p-6 rounded-2xl backdrop-blur-sm border border-sunrise/20 border-b-sunrise/50 shadow-lg shadow-sunrise/10">
+                  <div className="relative flex flex-col items-center z-10 bg-dark/95 p-6 rounded-2xl border border-sunrise/20 border-b-sunrise/50 shadow-lg shadow-sunrise/10">
                     <div className="relative mb-4">
                       <Database className="text-sunrise w-16 h-16" />
-                      <motion.div 
-                        animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.6, 0.3] }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                        className="absolute -inset-4 rounded-full -z-10"
-                        style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.6) 0%, transparent 70%)' }}
+                      <div 
+                        className="absolute -inset-4 rounded-full -z-10 animate-glow-pulse"
+                        style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.6) 0%, transparent 70%)', animationDuration: '2s' }}
                       />
                     </div>
                     <div className="flex gap-2">
                        {[0, 1, 2, 3].map(i => (
-                         <div key={i} className="w-8 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                            <motion.div 
-                              animate={{ x: [-32, 32] }} 
-                              transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.2, ease: "linear" }}
-                              className="w-full h-full bg-sunrise"
+                         <div key={i} className="w-8 h-1.5 bg-white/10 rounded-full overflow-hidden relative">
+                            <div 
+                              className="absolute top-0 left-0 w-full h-full bg-sunrise animate-slide-fast"
+                              style={{ animationDuration: '1.5s', animationDelay: `${i * 0.2}s` }}
                             />
                          </div>
                        ))}
@@ -607,56 +574,41 @@ const ServicesPage = () => {
                   
                   {/* Organic Cells / Bubbles */}
                   {[...Array(12)].map((_, i) => (
-                    <motion.div
+                    <div
                       key={`bubble-${i}`}
-                      animate={{
-                        y: [0, -400],
-                        x: [0, Math.random() * 60 - 30, 0],
-                        opacity: [0, 0.6, 0]
-                      }}
-                      transition={{
-                        duration: 8 + Math.random() * 6,
-                        repeat: Infinity,
-                        ease: "easeOut",
-                        delay: Math.random() * 5
-                      }}
+                      className="absolute rounded-full border border-accent/40 bg-gradient-to-tr from-accent/10 to-transparent animate-breathe"
                       style={{
                         left: `${10 + Math.random() * 80}%`,
                         bottom: '-50px',
                         width: `${Math.random() * 40 + 10}px`,
                         height: `${Math.random() * 40 + 10}px`,
+                        animationDuration: `${8 + Math.random() * 6}s`,
+                        animationDelay: `${Math.random() * 5}s`
                       }}
-                      className="absolute rounded-full border border-accent/40 bg-gradient-to-tr from-accent/10 to-transparent"
                     />
                   ))}
 
                   <div className="relative flex flex-col items-center z-10">
                     <div className="relative">
                        <FlaskConical className="text-accent w-28 h-28 mb-2" />
-                       <motion.div 
-                         initial={{ height: 0 }}
-                         animate={{ height: ['0%', '60%', '20%', '80%', '0%'] }}
-                         transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+                       <div 
                          className="absolute bottom-[20%] left-[30%] right-[30%] bg-accent/30 rounded-t-full z-10"
+                         style={{ animation: 'breathe 5s ease-in-out infinite' }}
                        />
                     </div>
-                    <motion.div 
-                      animate={{ y: [0, -20, -40], opacity: [0, 1, 0], scale: [0.5, 1.5, 0.5] }}
-                      transition={{ repeat: Infinity, duration: 2 }}
-                      className="absolute top-0 w-6 h-6 rounded-full"
-                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.8) 0%, transparent 70%)' }}
+                    <div 
+                      className="absolute top-0 w-6 h-6 rounded-full animate-float-simple"
+                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.8) 0%, transparent 70%)', animationDuration: '2s' }}
                     />
                   </div>
                   
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px]"
+                  <div 
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] animate-[spin_40s_linear_infinite]"
                   >
                      <Dna className="absolute inset-0 text-sunrise/10 w-full h-full" />
-                  </motion.div>
+                  </div>
                   
-                  <div className="absolute top-6 left-8 w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center bg-accent/5 backdrop-blur-md shadow-[0_0_15px_rgba(57,255,20,0.2)]">
+                  <div className="absolute top-6 left-8 w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 shadow-[0_0_15px_rgba(57,255,20,0.2)]">
                     <Microscope className="text-accent w-10 h-10 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]" />
                   </div>
                </div>
@@ -693,38 +645,32 @@ const ServicesPage = () => {
                   {/* Satellite Points connected to center */}
                   {[...Array(6)].map((_, i) => (
                       <div key={`sat-line-${i}`} className="absolute top-1/2 left-1/2 w-[200px] origin-left border-t border-dashed border-sunrise/20" style={{ transform: `rotate(${i * 60}deg)` }}>
-                          <motion.div 
-                             animate={{ left: ['0%', '100%'], opacity: [0, 1, 0] }}
-                             transition={{ repeat: Infinity, duration: 2, delay: i * 0.3 }}
-                             className="absolute top-[-2px] w-4 h-[3px] bg-sunrise rounded-full"
+                          <div 
+                             className="absolute top-[-2px] w-4 h-[3px] bg-sunrise rounded-full animate-data-flow"
+                             style={{ animationDuration: '2s', animationDelay: `${i * 0.3}s` }}
                           />
                       </div>
                   ))}
 
                   {/* Orbital Nodes */}
                   {[...Array(4)].map((_, i) => (
-                    <motion.div
+                    <div
                       key={`orbit-${i}`}
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 10 + i * 5, repeat: Infinity, ease: "linear" }}
-                      style={{ width: `${140 + i * 50}px`, height: `${140 + i * 50}px` }}
-                      className="absolute border border-sunrise/10 rounded-full"
+                      style={{ width: `${140 + i * 50}px`, height: `${140 + i * 50}px`, animationDuration: `${10 + i * 5}s` }}
+                      className="absolute border border-sunrise/10 rounded-full animate-orbit"
                     >
-                      <motion.div 
-                        animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full" 
+                      <div 
+                        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full animate-pulse-glow" 
+                        style={{ animationDuration: '2s' }}
                       />
-                    </motion.div>
+                    </div>
                   ))}
 
                   <div className="relative z-10">
                     <Globe className="text-sunrise w-28 h-28 animate-[spin_30s_linear_infinite]" />
-                    <motion.div 
-                      animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.05, 1] }}
-                      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                      className="absolute -inset-4 rounded-full -z-10"
-                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.3) 0%, transparent 70%)' }}
+                    <div 
+                      className="absolute -inset-4 rounded-full -z-10 animate-breathe"
+                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.3) 0%, transparent 70%)', animationDuration: '2s' }}
                     />
                   </div>
                </div>
@@ -756,25 +702,16 @@ const AboutPage = () => {
         {/* Animated cell background */}
         <div className="absolute inset-0 pointer-events-none opacity-40">
            {[...Array(15)].map((_, i) => (
-             <motion.div
+             <div
                key={i}
-               className="absolute rounded-full border border-accent/30 flex items-center justify-center"
+               className="absolute rounded-full border border-accent/30 flex items-center justify-center animate-breathe"
                style={{
                  left: `${Math.random() * 100}%`,
                  top: `${Math.random() * 100}%`,
                  width: `${Math.random() * 60 + 30}px`,
                  height: `${Math.random() * 60 + 30}px`,
-               }}
-               animate={{
-                 y: [Math.random() * 50 - 25, Math.random() * -50 + 25],
-                 x: [Math.random() * 50 - 25, Math.random() * -50 + 25],
-                 opacity: [0.1, 0.4, 0.1],
-                 scale: [0.8, 1.2, 0.8],
-               }}
-               transition={{
-                 duration: Math.random() * 8 + 5,
-                 repeat: Infinity,
-                 ease: "linear"
+                 animationDuration: `${Math.random() * 8 + 5}s`,
+                 animationDelay: `${Math.random() * 5}s`
                }}
              />
            ))}
@@ -827,9 +764,9 @@ const AboutPage = () => {
                     </div>
                     
                     <div 
-                      className="aspect-square bg-gradient-to-br from-accent/20 to-transparent border border-accent/30 rounded-3xl flex items-center justify-center p-6 text-primary font-bold text-3xl leading-tight relative overflow-hidden backdrop-blur-sm hover:scale-105 transition-transform"
+                      className="aspect-square bg-gradient-to-br from-accent/40 to-transparent border border-accent/30 rounded-3xl flex items-center justify-center p-6 text-primary font-bold text-3xl leading-tight relative overflow-hidden hover:scale-105 transition-transform bg-primary"
                     >
-                       <div className="absolute right-0 top-0 w-24 h-24 bg-accent/20 rounded-full blur-xl"></div>
+                       <div className="absolute right-0 top-0 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.3) 0%, transparent 70%)' }}></div>
                        <span className="text-white relative z-10 drop-shadow-md">生信分析<br/>核心链</span>
                     </div>
                     
@@ -843,7 +780,7 @@ const AboutPage = () => {
                     <div 
                       className="aspect-square bg-gray-800 rounded-3xl overflow-hidden relative group hover:scale-105 transition-transform"
                     >
-                       <div className="absolute inset-0 bg-accent/20 group-hover:bg-accent/0 mix-blend-overlay transition-all duration-500 z-10"></div>
+                       <div className="absolute inset-0 bg-accent/20 group-hover:bg-accent/0 transition-all duration-500 z-10"></div>
                        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=400" alt="lab" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     </div>
                  </div>
