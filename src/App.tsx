@@ -406,50 +406,61 @@ const ServicesPage = () => {
             <div className="relative group">
                <div className="absolute inset-0 bg-sunrise/20 blur-[100px] rounded-full group-hover:opacity-100 transition-opacity opacity-50"></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
-                  <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')]"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-sunrise/10 to-transparent"></div>
+                  <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-sunrise/5 to-transparent"></div>
                   
-                  {/* Floating Data Cloud */}
-                  {[...Array(12)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      animate={{
-                        x: [Math.random() * 200 - 100, Math.random() * 200 - 100],
-                        y: [Math.random() * 100 - 50, Math.random() * 100 - 50],
-                        opacity: [0.1, 0.4, 0.1],
-                      }}
-                      transition={{
-                        duration: 5 + Math.random() * 5,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="absolute w-1.5 h-1.5 bg-sunrise rounded-full blur-[1px]"
-                    />
+                  {/* Digital Rain / Data Stream Effect */}
+                  {[...Array(15)].map((_, i) => (
+                    <div key={`stream-${i}`} className="absolute top-0 w-[1px] h-full" style={{ left: `${(i / 15) * 100}%` }}>
+                      <motion.div
+                        animate={{ y: [-100, 400] }}
+                        transition={{ repeat: Infinity, duration: 1.5 + Math.random() * 2, delay: Math.random() * 2, ease: "linear" }}
+                        className="w-full h-16 bg-gradient-to-b from-transparent via-sunrise to-transparent shadow-[0_0_8px_rgba(223,255,0,0.8)] opacity-60"
+                      />
+                    </div>
                   ))}
 
-                  <div className="relative flex flex-col items-center z-10">
+                  {/* Circular Radar Scan */}
+                  <div className="absolute w-[180px] h-[180px] rounded-full border border-sunrise/10 overflow-hidden">
+                      <motion.div 
+                         animate={{ rotate: 360 }}
+                         transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                         style={{ transformOrigin: 'bottom right' }}
+                         className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-sunrise/20 to-transparent"
+                      />
+                  </div>
+                  <div className="absolute w-[240px] h-[240px] rounded-full border border-dashed border-sunrise/20 animate-[spin_20s_linear_infinite]" />
+
+                  <div className="relative flex flex-col items-center z-10 bg-dark/60 p-6 rounded-2xl backdrop-blur-sm border border-sunrise/20 border-b-sunrise/50 shadow-lg shadow-sunrise/10">
                     <div className="relative mb-4">
-                      <Database className="text-sunrise w-20 h-20 drop-shadow-[0_0_15px_rgba(223,255,0,0.6)]" />
+                      <Database className="text-sunrise w-16 h-16 drop-shadow-[0_0_15px_rgba(223,255,0,0.8)]" />
                       <motion.div 
                         animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.6, 0.3] }}
-                        transition={{ repeat: Infinity, duration: 4 }}
-                        className="absolute inset-0 bg-sunrise rounded-full blur-2xl -z-10"
+                        transition={{ repeat: Infinity, duration: 2 }}
+                        className="absolute inset-0 bg-sunrise rounded-full blur-xl -z-10"
                       />
                     </div>
                     <div className="flex gap-2">
-                       {[0, 1, 2].map(i => (
-                         <div key={i} className="w-12 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                       {[0, 1, 2, 3].map(i => (
+                         <div key={i} className="w-8 h-1.5 bg-white/10 rounded-full overflow-hidden">
                             <motion.div 
-                              animate={{ x: [-50, 50] }} 
-                              transition={{ repeat: Infinity, duration: 2, delay: i * 0.3 }}
-                              className="w-1/2 h-full bg-sunrise"
+                              animate={{ x: [-32, 32] }} 
+                              transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.2, ease: "linear" }}
+                              className="w-full h-full bg-sunrise"
                             />
                          </div>
                        ))}
                     </div>
                   </div>
 
-                  <Activity className="absolute bottom-10 left-10 text-accent opacity-30 w-12 h-12" />
+                  <Activity className="absolute bottom-10 left-10 text-accent outline-none stroke-[1.5] w-12 h-12">
+                     <motion.animate 
+                        attributeName="stroke-dasharray" 
+                        values="0,100;100,0;0,100" 
+                        dur="3s" 
+                        repeatCount="indefinite" 
+                     />
+                  </Activity>
                </div>
             </div>
           </div>
@@ -475,40 +486,58 @@ const ServicesPage = () => {
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-accent/20 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-tr from-sunrise/20 to-transparent"></div>
                   
-                  {/* Floating Bio-particles */}
-                  {[...Array(8)].map((_, i) => (
+                  {/* Organic Cells / Bubbles */}
+                  {[...Array(12)].map((_, i) => (
                     <motion.div
-                      key={i}
+                      key={`bubble-${i}`}
                       animate={{
-                        y: [-20, 20],
-                        x: [-10, 10],
-                        scale: [1, 1.2, 1],
-                        opacity: [0.2, 0.5, 0.2]
+                        y: [0, -400],
+                        x: [0, Math.random() * 60 - 30, 0],
+                        opacity: [0, 0.6, 0]
                       }}
                       transition={{
-                        duration: 3 + Math.random() * 3,
+                        duration: 8 + Math.random() * 6,
                         repeat: Infinity,
-                        ease: "linear"
+                        ease: "easeOut",
+                        delay: Math.random() * 5
                       }}
                       style={{
-                        left: `${15 + Math.random() * 70}%`,
-                        top: `${15 + Math.random() * 70}%`
+                        left: `${10 + Math.random() * 80}%`,
+                        bottom: '-50px',
+                        width: `${Math.random() * 40 + 10}px`,
+                        height: `${Math.random() * 40 + 10}px`,
                       }}
-                      className="absolute w-2 h-2 bg-accent/40 rounded-full blur-[2px]"
+                      className="absolute rounded-full border border-accent/40 bg-gradient-to-tr from-accent/10 to-transparent backdrop-blur-md"
                     />
                   ))}
 
                   <div className="relative flex flex-col items-center z-10">
-                    <FlaskConical className="text-accent w-24 h-24 mb-2 drop-shadow-[0_0_15px_rgba(57,255,20,0.4)]" />
+                    <div className="relative">
+                       <FlaskConical className="text-accent w-28 h-28 mb-2 drop-shadow-[0_0_20px_rgba(57,255,20,0.6)]" />
+                       <motion.div 
+                         initial={{ height: 0 }}
+                         animate={{ height: ['0%', '60%', '20%', '80%', '0%'] }}
+                         transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+                         className="absolute bottom-[20%] left-[30%] right-[30%] bg-accent/30 rounded-full blur-[2px] z-10"
+                       />
+                    </div>
                     <motion.div 
-                      animate={{ y: [0, -20, -40], opacity: [0, 1, 0], scale: [0.5, 1, 0.5] }}
+                      animate={{ y: [0, -20, -40], opacity: [0, 1, 0], scale: [0.5, 1.5, 0.5] }}
                       transition={{ repeat: Infinity, duration: 2 }}
-                      className="absolute top-0 w-3 h-3 bg-sunrise rounded-full blur-[1px]"
+                      className="absolute top-0 w-4 h-4 bg-sunrise rounded-full blur-[2px] shadow-[0_0_15px_rgba(223,255,0,0.8)]"
                     />
                   </div>
-                  <Dna className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sunrise/5 w-64 h-64 rotate-45" />
-                  <div className="absolute bottom-6 right-8 w-16 h-16 rounded-full border border-sunrise/30 flex items-center justify-center bg-sunrise/5 backdrop-blur-sm">
-                    <Microscope className="text-sunrise w-8 h-8" />
+                  
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px]"
+                  >
+                     <Dna className="absolute inset-0 text-sunrise/10 w-full h-full" />
+                  </motion.div>
+                  
+                  <div className="absolute top-6 left-8 w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center bg-accent/5 backdrop-blur-md shadow-[0_0_15px_rgba(57,255,20,0.2)]">
+                    <Microscope className="text-accent w-10 h-10 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]" />
                   </div>
                </div>
             </div>
@@ -533,30 +562,42 @@ const ServicesPage = () => {
                <div className="absolute inset-0 bg-sunrise/10 blur-[120px] rounded-full group-hover:opacity-100 transition-opacity opacity-40"></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-sunrise/10 via-transparent to-transparent"></div>
-                  
+                  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-[0.15]"></div>
+
+                  {/* Satellite Points connected to center */}
+                  {[...Array(6)].map((_, i) => (
+                      <div key={`sat-line-${i}`} className="absolute top-1/2 left-1/2 w-[200px] origin-left border-t border-dashed border-sunrise/20" style={{ transform: `rotate(${i * 60}deg)` }}>
+                          <motion.div 
+                             animate={{ left: ['0%', '100%'], opacity: [0, 1, 0] }}
+                             transition={{ repeat: Infinity, duration: 2, delay: i * 0.3 }}
+                             className="absolute top-[-2px] w-4 h-[3px] bg-sunrise rounded-full shadow-[0_0_8px_#DFFF00]"
+                          />
+                      </div>
+                  ))}
+
                   {/* Orbital Nodes */}
                   {[...Array(4)].map((_, i) => (
                     <motion.div
-                      key={i}
+                      key={`orbit-${i}`}
                       animate={{ rotate: 360 }}
                       transition={{ duration: 10 + i * 5, repeat: Infinity, ease: "linear" }}
-                      style={{ width: `${160 + i * 40}px`, height: `${160 + i * 40}px` }}
-                      className="absolute border border-white/5 rounded-full"
+                      style={{ width: `${140 + i * 50}px`, height: `${140 + i * 50}px` }}
+                      className="absolute border border-sunrise/10 rounded-full"
                     >
                       <motion.div 
-                        animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.8, 0.3] }}
+                        animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
                         transition={{ repeat: Infinity, duration: 2 }}
-                        className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-sunrise rounded-full glow-border-sunrise" 
+                        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_15px_#DFFF00]" 
                       />
                     </motion.div>
                   ))}
 
                   <div className="relative z-10">
-                    <Globe className="text-sunrise w-32 h-32 animate-[spin_25s_linear_infinite] drop-shadow-[0_0_20px_rgba(223,255,0,0.3)]" />
+                    <Globe className="text-sunrise w-28 h-28 animate-[spin_30s_linear_infinite] drop-shadow-[0_0_20px_rgba(223,255,0,0.5)]" />
                     <motion.div 
-                      animate={{ opacity: [0.3, 0.6, 0.3], rotate: [0, 360] }}
-                      transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
-                      className="absolute -inset-4 border border-dashed border-sunrise/40 rounded-full" 
+                      animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.05, 1] }}
+                      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                      className="absolute inset-0 bg-sunrise/20 blur-xl rounded-full -z-10" 
                     />
                   </div>
                </div>

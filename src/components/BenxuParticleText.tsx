@@ -12,29 +12,39 @@ export const BenxuParticleText: React.FC = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const text = 'BENXU BIO';
-    let mouse = { x: -1000, y: -1000, radius: 60 };
+    const sequence = ['B', 'E', 'N', 'X', 'U', 'B', 'I', 'O', 'BENXU BIO'];
+    let currentStep = 0;
+    let lastChangeTime = Date.now();
+    let allCoords: {x: number, y: number}[][] = [];
+    
+    let mouse = { x: -1000, y: -1000, radius: 100 };
 
     class Particle {
       x: number;
       y: number;
-      baseX: number;
-      baseY: number;
+      vx: number = 0;
+      vy: number = 0;
+      targetX: number;
+      targetY: number;
       size: number;
       density: number;
       color: string;
       alpha: number;
+      friction: number;
+      spring: number;
 
       constructor(x: number, y: number) {
         // Start scattered from random locations on screen
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
-        this.baseX = x;
-        this.baseY = y;
-        this.size = Math.random() * 2 + 1;
-        this.density = (Math.random() * 40) + 5;
-        this.color = Math.random() > 0.8 ? '#DFFF00' : '#39FF14';
-        this.alpha = Math.random() * 0.5 + 0.5;
+        this.targetX = x;
+        this.targetY = y;
+        this.size = Math.random() * 2 + 0.5;
+        this.density = Math.random() * 15 + 5;
+        this.color = Math.random() > 0.7 ? '#DFFF00' : '#39FF14';
+        this.alpha = Math.random() * 0.6 + 0.4;
+        this.friction = Math.random() * 0.1 + 0.75; // 0.75 - 0.85
+        this.spring = Math.random() * 0.05 + 0.05; // 0.05 - 0.10
       }
 
       draw() {
@@ -52,73 +62,97 @@ export const BenxuParticleText: React.FC = () => {
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
-        let forceDirectionX = dx / distance;
-        let forceDirectionY = dy / distance;
-        let maxDistance = mouse.radius;
-        let force = (maxDistance - distance) / maxDistance;
-        let directionX = forceDirectionX * force * this.density;
-        let directionY = forceDirectionY * force * this.density;
 
-        if (distance < maxDistance) {
-          this.x -= directionX;
-          this.y -= directionY;
-        } else {
-          if (this.x !== this.baseX) {
-            let dx = this.x - this.baseX;
-            this.x -= dx / 10;
-          }
-          if (this.y !== this.baseY) {
-            let dy = this.y - this.baseY;
-            this.y -= dy / 10;
-          }
+        if (distance < mouse.radius) {
+          let forceDirectionX = dx / distance;
+          let forceDirectionY = dy / distance;
+          let force = (mouse.radius - distance) / mouse.radius;
+          this.vx -= forceDirectionX * force * this.density;
+          this.vy -= forceDirectionY * force * this.density;
         }
+
+        let targetDx = this.targetX - this.x;
+        let targetDy = this.targetY - this.y;
+
+        this.vx += targetDx * this.spring;
+        this.vy += targetDy * this.spring;
+
+        this.vx *= this.friction;
+        this.vy *= this.friction;
+
+        this.x += this.vx;
+        this.y += this.vy;
         
         // slight wriggle to make it look alive
-        if (Math.random() > 0.9) {
-           this.x += (Math.random() - 0.5) * 0.5;
-           this.y += (Math.random() - 0.5) * 0.5;
+        if (Math.random() > 0.92) {
+           this.vx += (Math.random() - 0.5) * 0.5;
+           this.vy += (Math.random() - 0.5) * 0.5;
         }
       }
     }
 
-    const init = () => {
-      particles = [];
-      const width = canvas.width;
-      const height = canvas.height;
-      
-      ctx.fillStyle = 'black';
-      ctx.fillRect(0, 0, width, height);
+    const getTextCoordinates = (text: string, width: number, height: number) => {
+      ctx.clearRect(0, 0, width, height);
 
-      // Draw text to read its pixels
-      let fontSize = Math.min(width / text.length * 1.5, 120);
-      if (width < 600) fontSize = width / text.length * 1.8;
+      let fontSize = 160;
+      if (text.length === 1) {
+          fontSize = Math.min(width * 0.4, 180);
+      } else {
+          fontSize = width < 600 ? 80 : 160;
+      }
       
-      ctx.font = `900 ${fontSize}px sans-serif`;
+      ctx.font = `900 ${fontSize}px "Inter", sans-serif`;
+      
+      // Ensure text fits within 94% of canvas width to prevent clipping
+      let textWidth = ctx.measureText(text).width;
+      while (textWidth > width * 0.94 && fontSize > 10) {
+          fontSize -= 2;
+          ctx.font = `900 ${fontSize}px "Inter", sans-serif`;
+          textWidth = ctx.measureText(text).width;
+      }
+      
       ctx.fillStyle = 'white';
-      ctx.textAlign = 'left';
+      ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       
-      // Measure text to center it properly
-      const textMetrics = ctx.measureText(text);
-      let startX = (width - textMetrics.width) / 2;
-      ctx.fillText(text, startX, height / 2);
+      ctx.fillText(text, width / 2, height / 2);
 
       const textCoordinates = ctx.getImageData(0, 0, width, height);
-      
-      // Step determines gap between particles (lower = denser)
-      const step = width < 600 ? 3 : 4;
+      let coords = [];
+      const step = width < 600 ? 2 : 3;
       
       for (let y = 0; y < textCoordinates.height; y += step) {
         for (let x = 0; x < textCoordinates.width; x += step) {
-          if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3] > 128) {
-             let positionX = x + Math.random() * 2 - 1;
-             let positionY = y + Math.random() * 2 - 1;
-             particles.push(new Particle(positionX, positionY));
+          const alpha = textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3];
+          if (alpha > 128) {
+             coords.push({x: x + (Math.random() - 0.5) * (step * 0.5), y: y + (Math.random() - 0.5) * (step * 0.5)});
           }
         }
       }
-      
       ctx.clearRect(0, 0, width, height);
+      return coords;
+    };
+
+    const init = () => {
+      const width = canvas.width;
+      const height = canvas.height;
+      if (width === 0 || height === 0) return;
+
+      allCoords = sequence.map(txt => getTextCoordinates(txt, width, height));
+
+      const maxParticles = Math.max(...allCoords.map(c => c.length));
+      
+      particles = [];
+      const initialCoords = allCoords[0];
+      if (!initialCoords || initialCoords.length === 0) return;
+
+      for (let i = 0; i < maxParticles; i++) {
+         const coord = initialCoords[i % initialCoords.length];
+         particles.push(new Particle(coord.x, coord.y));
+      }
+      
+      currentStep = 0;
+      lastChangeTime = Date.now();
     };
 
     const handleResize = () => {
@@ -133,23 +167,23 @@ export const BenxuParticleText: React.FC = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Draw faint connections between close particles to make it look biological
-      /* 
-      // Optional: This might hurt performance depending on device
-      ctx.beginPath();
-      for (let i = 0; i < particles.length; i+=3) { // optimization step
-          for (let j = i + 1; j < particles.length; j+=3) {
-              const dx = particles[i].x - particles[j].x;
-              const dy = particles[i].y - particles[j].y;
-              if (dx*dx + dy*dy < 400) {
-                  ctx.moveTo(particles[i].x, particles[i].y);
-                  ctx.lineTo(particles[j].x, particles[j].y);
+      const now = Date.now();
+      const currentDuration = currentStep === sequence.length - 1 ? 5000 : 700; // 5s for full word, 0.7s for letters
+
+      if (now - lastChangeTime > currentDuration && allCoords.length > 0) {
+          currentStep = (currentStep + 1) % sequence.length;
+          lastChangeTime = now;
+          
+          const newCoords = allCoords[currentStep];
+          if (newCoords && newCoords.length > 0) {
+              for (let i = 0; i < particles.length; i++) {
+                 const coordIdx = Math.floor(Math.random() * newCoords.length);
+                 const coord = newCoords[coordIdx];
+                 particles[i].targetX = coord.x;
+                 particles[i].targetY = coord.y;
               }
           }
       }
-      ctx.strokeStyle = 'rgba(57, 255, 20, 0.05)';
-      ctx.stroke();
-      */
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].draw();
@@ -173,7 +207,6 @@ export const BenxuParticleText: React.FC = () => {
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseleave', handleMouseLeave);
     
-    // Slight delay to ensure parent bounds are settled
     setTimeout(() => {
         handleResize(); 
         animate();
@@ -189,7 +222,7 @@ export const BenxuParticleText: React.FC = () => {
 
   return (
     <div className="w-full relative group">
-       <div className="absolute inset-0 bg-accent/5 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-full" pointer-events="none"></div>
+       <div className="absolute inset-0 bg-accent/5 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-full pointer-events-none"></div>
        <canvas ref={canvasRef} className="w-full h-[120px] md:h-[200px] cursor-crosshair z-10 relative" />
     </div>
   );
