@@ -238,7 +238,7 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         </section>
 
         {/* Workflow */}
-        <section className="py-32 relative z-10 bg-primary/20 backdrop-blur-sm border-t border-b border-white/5">
+        <section className="py-32 relative z-10 bg-primary/40 border-t border-b border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-20">
             <div className="md:w-1/2">
@@ -295,10 +295,11 @@ const FloatingBioElements = () => {
       {[...Array(5)].map((_, i) => (
         <motion.div
            key={`dna-${i}`}
-           className="absolute text-accent/60 drop-shadow-[0_0_15px_rgba(57,255,20,0.5)]"
+           className="absolute text-accent/60"
            style={{
               left: `${10 + Math.random() * 80}%`,
               top: `${Math.random() * 100}%`,
+              willChange: "transform, opacity"
            }}
            animate={{
               y: [0, -100, 0],
@@ -318,13 +319,14 @@ const FloatingBioElements = () => {
       {[...Array(6)].map((_, i) => (
         <motion.div
            key={`hex-${i}`}
-           className="absolute border border-sunrise/60 rounded-xl shadow-[0_0_20px_rgba(223,255,0,0.3)] backdrop-blur-sm"
+           className="absolute border border-sunrise/60 rounded-xl"
            style={{
               width: 100 + i * 40,
               height: 110 + i * 40,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              backgroundImage: `linear-gradient(120deg, rgba(223,255,0,0.25), transparent)`
+              backgroundImage: `linear-gradient(120deg, rgba(223,255,0,0.25), transparent)`,
+              willChange: "transform, opacity"
            }}
            animate={{
               y: [0, 80, 0],
@@ -342,10 +344,11 @@ const FloatingBioElements = () => {
       {[...Array(4)].map((_, i) => (
         <motion.div
            key={`flask-${i}`}
-           className="absolute text-accent/60 backdrop-blur-3xl drop-shadow-[0_0_15px_rgba(57,255,20,0.5)]"
+           className="absolute text-accent/60"
            style={{
               left: `${20 + Math.random() * 60}%`,
               top: `${Math.random() * 100}%`,
+              willChange: "transform, opacity"
            }}
            animate={{
               y: [0, 150, 0],
@@ -367,7 +370,7 @@ const FloatingBioElements = () => {
 
 const ServiceCard = ({ icon, title, description, items, delay = 0 }: { icon: React.ReactNode, title: string, description: string, items: string[], delay?: number }) => (
   <div 
-    className="bg-primary/50 p-8 rounded-3xl border border-white/10 hover:border-sunrise/40 transition-all group backdrop-blur-md"
+    className="bg-primary/80 p-8 rounded-3xl border border-white/10 hover:border-sunrise/40 transition-all group"
   >
     <div className="text-sunrise mb-6 bg-sunrise/10 w-fit p-4 rounded-2xl group-hover:bg-sunrise group-hover:text-primary transition-colors">
       {icon}
@@ -513,7 +516,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group"
             >
-               <div className="absolute inset-0 bg-sunrise/20 blur-[100px] rounded-full group-hover:opacity-100 transition-opacity opacity-50"></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.15) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')]"></div>
                   <div className="absolute inset-0 bg-gradient-to-br from-sunrise/5 to-transparent"></div>
@@ -524,7 +527,7 @@ const ServicesPage = () => {
                       <motion.div
                         animate={{ y: [-100, 400] }}
                         transition={{ repeat: Infinity, duration: 1.5 + Math.random() * 2, delay: Math.random() * 2, ease: "linear" }}
-                        className="w-full h-16 bg-gradient-to-b from-transparent via-sunrise to-transparent shadow-[0_0_8px_rgba(223,255,0,0.8)] opacity-60"
+                        className="w-full h-16 bg-gradient-to-b from-transparent via-sunrise to-transparent opacity-60"
                       />
                     </div>
                   ))}
@@ -542,11 +545,12 @@ const ServicesPage = () => {
 
                   <div className="relative flex flex-col items-center z-10 bg-dark/60 p-6 rounded-2xl backdrop-blur-sm border border-sunrise/20 border-b-sunrise/50 shadow-lg shadow-sunrise/10">
                     <div className="relative mb-4">
-                      <Database className="text-sunrise w-16 h-16 drop-shadow-[0_0_15px_rgba(223,255,0,0.8)]" />
+                      <Database className="text-sunrise w-16 h-16" />
                       <motion.div 
                         animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.6, 0.3] }}
                         transition={{ repeat: Infinity, duration: 2 }}
-                        className="absolute inset-0 bg-sunrise rounded-full blur-xl -z-10"
+                        className="absolute -inset-4 rounded-full -z-10"
+                        style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.6) 0%, transparent 70%)' }}
                       />
                     </div>
                     <div className="flex gap-2">
@@ -597,7 +601,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group md:order-1"
             >
-               <div className="absolute inset-0 bg-accent/10 blur-[100px] rounded-full group-hover:opacity-100 transition-opacity opacity-50"></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.1) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-accent/20 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-tr from-sunrise/20 to-transparent"></div>
                   
@@ -622,24 +626,25 @@ const ServicesPage = () => {
                         width: `${Math.random() * 40 + 10}px`,
                         height: `${Math.random() * 40 + 10}px`,
                       }}
-                      className="absolute rounded-full border border-accent/40 bg-gradient-to-tr from-accent/10 to-transparent backdrop-blur-md"
+                      className="absolute rounded-full border border-accent/40 bg-gradient-to-tr from-accent/10 to-transparent"
                     />
                   ))}
 
                   <div className="relative flex flex-col items-center z-10">
                     <div className="relative">
-                       <FlaskConical className="text-accent w-28 h-28 mb-2 drop-shadow-[0_0_20px_rgba(57,255,20,0.6)]" />
+                       <FlaskConical className="text-accent w-28 h-28 mb-2" />
                        <motion.div 
                          initial={{ height: 0 }}
                          animate={{ height: ['0%', '60%', '20%', '80%', '0%'] }}
                          transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
-                         className="absolute bottom-[20%] left-[30%] right-[30%] bg-accent/30 rounded-full blur-[2px] z-10"
+                         className="absolute bottom-[20%] left-[30%] right-[30%] bg-accent/30 rounded-t-full z-10"
                        />
                     </div>
                     <motion.div 
                       animate={{ y: [0, -20, -40], opacity: [0, 1, 0], scale: [0.5, 1.5, 0.5] }}
                       transition={{ repeat: Infinity, duration: 2 }}
-                      className="absolute top-0 w-4 h-4 bg-sunrise rounded-full blur-[2px] shadow-[0_0_15px_rgba(223,255,0,0.8)]"
+                      className="absolute top-0 w-6 h-6 rounded-full"
+                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.8) 0%, transparent 70%)' }}
                     />
                   </div>
                   
@@ -680,7 +685,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group"
             >
-               <div className="absolute inset-0 bg-sunrise/10 blur-[120px] rounded-full group-hover:opacity-100 transition-opacity opacity-40"></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-40" style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.1) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-sunrise/10 via-transparent to-transparent"></div>
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-[0.15]"></div>
@@ -691,7 +696,7 @@ const ServicesPage = () => {
                           <motion.div 
                              animate={{ left: ['0%', '100%'], opacity: [0, 1, 0] }}
                              transition={{ repeat: Infinity, duration: 2, delay: i * 0.3 }}
-                             className="absolute top-[-2px] w-4 h-[3px] bg-sunrise rounded-full shadow-[0_0_8px_#DFFF00]"
+                             className="absolute top-[-2px] w-4 h-[3px] bg-sunrise rounded-full"
                           />
                       </div>
                   ))}
@@ -708,17 +713,18 @@ const ServicesPage = () => {
                       <motion.div 
                         animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
                         transition={{ repeat: Infinity, duration: 2 }}
-                        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_15px_#DFFF00]" 
+                        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full" 
                       />
                     </motion.div>
                   ))}
 
                   <div className="relative z-10">
-                    <Globe className="text-sunrise w-28 h-28 animate-[spin_30s_linear_infinite] drop-shadow-[0_0_20px_rgba(223,255,0,0.5)]" />
+                    <Globe className="text-sunrise w-28 h-28 animate-[spin_30s_linear_infinite]" />
                     <motion.div 
                       animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.05, 1] }}
                       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                      className="absolute inset-0 bg-sunrise/20 blur-xl rounded-full -z-10" 
+                      className="absolute -inset-4 rounded-full -z-10"
+                      style={{ background: 'radial-gradient(circle, rgba(223,255,0,0.3) 0%, transparent 70%)' }}
                     />
                   </div>
                </div>
@@ -810,7 +816,7 @@ const AboutPage = () => {
               <div 
                 className="lg:w-1/2 w-full relative"
               >
-                 <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full"></div>
+                 <div className="absolute -inset-10 rounded-full" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.05) 0%, transparent 70%)' }}></div>
                  <div className="grid grid-cols-2 gap-4 relative z-10">
                     <div 
                       className="aspect-square bg-accent/5 border border-accent/20 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden group hover:scale-105 transition-transform"

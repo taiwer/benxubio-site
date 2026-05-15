@@ -51,10 +51,7 @@ export const BenxuParticleText: React.FC = () => {
         if (!ctx) return;
         ctx.fillStyle = this.color;
         ctx.globalAlpha = this.alpha;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
+        ctx.fillRect(this.x - this.size, this.y - this.size, this.size * 2, this.size * 2);
         ctx.globalAlpha = 1.0;
       }
 
@@ -222,7 +219,7 @@ export const BenxuParticleText: React.FC = () => {
 
   return (
     <div className="w-full relative group">
-       <div className="absolute inset-0 bg-accent/5 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-full pointer-events-none"></div>
+       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.05) 0%, transparent 60%)' }}></div>
        <canvas ref={canvasRef} className="w-full h-[120px] md:h-[200px] cursor-crosshair z-10 relative" />
     </div>
   );
