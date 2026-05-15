@@ -13,7 +13,7 @@ const Navbar = ({ currentPage, setPage }: { currentPage: Page, setPage: (p: Page
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-primary/95 border-b border-emerald-900/30">
+    <nav className="fixed top-0 w-full z-50 bg-primary/95 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
         <div className="flex justify-between h-24 items-center">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setPage('home')}>
@@ -21,7 +21,7 @@ const Navbar = ({ currentPage, setPage }: { currentPage: Page, setPage: (p: Page
               <span className="text-black font-bold text-xl font-serif italic">B</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-bold tracking-tight text-white">本旭生物</span>
+              <span className="text-2xl font-bold tracking-tight text-slate-900">本旭生物</span>
               <span className="text-[10px] text-sunrise uppercase tracking-[0.2em] leading-none font-light">Benxu Biotech</span>
             </div>
           </div>
@@ -49,7 +49,7 @@ const Navbar = ({ currentPage, setPage }: { currentPage: Page, setPage: (p: Page
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden bg-primary border-b border-emerald-900/30 px-6 py-8 space-y-6"
+            className="md:hidden bg-primary border-b border-slate-200 px-6 py-8 space-y-6"
           >
             <MobileNavLink active={currentPage === 'home'} onClick={() => { setPage('home'); setIsOpen(false); }}>首页</MobileNavLink>
             <MobileNavLink active={currentPage === 'services'} onClick={() => { setPage('services'); setIsOpen(false); }}>技术服务</MobileNavLink>
@@ -65,7 +65,7 @@ const Navbar = ({ currentPage, setPage }: { currentPage: Page, setPage: (p: Page
 const NavLink = ({ children, active, onClick }: { children: React.ReactNode, active: boolean, onClick: () => void }) => (
   <button
     onClick={onClick}
-    className={`text-sm font-medium tracking-widest transition-all relative py-2 ${active ? 'text-sunrise transition-colors' : 'text-gray-300 hover:text-sunrise'}`}
+    className={`text-sm font-medium tracking-widest transition-all relative py-2 ${active ? 'text-sunrise transition-colors' : 'text-slate-700 hover:text-sunrise'}`}
   >
     {children}
     {active && (
@@ -80,14 +80,14 @@ const NavLink = ({ children, active, onClick }: { children: React.ReactNode, act
 const MobileNavLink = ({ children, active, onClick }: { children: React.ReactNode, active: boolean, onClick: () => void }) => (
   <button
     onClick={onClick}
-    className={`block w-full text-left text-lg font-medium transition-colors ${active ? 'text-accent' : 'text-gray-300'}`}
+    className={`block w-full text-left text-lg font-medium transition-colors ${active ? 'text-accent' : 'text-slate-700'}`}
   >
     {children}
   </button>
 );
 
 const Footer = () => (
-  <footer className="relative bg-primary/90 border-t border-emerald-900/30 pt-20 pb-10">
+  <footer className="relative bg-primary/90 border-t border-slate-200 pt-20 pb-10">
     <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
         <div className="col-span-1 md:col-span-2">
@@ -112,8 +112,8 @@ const Footer = () => (
           </div>
         </div>
         <div>
-          <h4 className="text-white font-bold mb-8 tracking-widest text-sm">快速资源</h4>
-          <ul className="space-y-4 text-emerald-100/50 text-sm">
+          <h4 className="text-slate-900 font-bold mb-8 tracking-widest text-sm">快速资源</h4>
+          <ul className="space-y-4 text-slate-600 text-sm">
             <li><a href="#" className="hover:text-accent transition-colors">技术服务分类</a></li>
             <li><a href="#" className="hover:text-accent transition-colors">进出口贸易支撑</a></li>
             <li><a href="#" className="hover:text-accent transition-colors">实验合作申请</a></li>
@@ -121,15 +121,15 @@ const Footer = () => (
           </ul>
         </div>
         <div>
-          <h4 className="text-white font-bold mb-8 tracking-widest text-sm">联络中心</h4>
-          <ul className="space-y-4 text-emerald-100/50 text-sm">
+          <h4 className="text-slate-900 font-bold mb-8 tracking-widest text-sm">联络中心</h4>
+          <ul className="space-y-4 text-slate-600 text-sm">
             <li className="flex items-center gap-3"><Phone size={16} className="text-accent" /> 021-XXXX-XXXX</li>
             <li className="flex items-center gap-3"><Mail size={16} className="text-accent" /> contact@benxubio.com</li>
             <li className="flex items-start gap-3"><MapPin size={16} className="text-accent mt-1" /> 上海市浦东新区张江高科技园区</li>
           </ul>
         </div>
       </div>
-      <div className="mt-20 pt-8 border-t border-emerald-900/20 flex flex-col md:flex-row justify-between items-center text-emerald-500/60 text-xs gap-4">
+      <div className="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-4">
         <div className="flex gap-6">
           <span>ICP备 2024050607号</span>
           <span>隐私权限管理</span>
@@ -163,13 +163,13 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
               探索生命本源 <br />
               <span className="gradient-text glow-text-sunrise">点亮科研旭光</span>
             </h1>
-            <p className="text-xl text-gray-300 mb-10 leading-relaxed">
+            <p className="text-xl text-slate-700 mb-10 leading-relaxed">
               本旭生物（Benxu Biotech）提供领先的“生信大数据分析 + 前沿生物实验验证”一站式科研解决方案。我们协助您从海量原始数据中提取核心洞察，助力科研突破。
             </p>
             <div className="flex flex-wrap gap-4">
               <button 
                 onClick={() => setPage('services')}
-                className="bg-sunrise text-primary hover:bg-white px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-sunrise/20"
+                className="bg-sunrise text-primary hover:bg-slate-50 hover:text-sunrise px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-sunrise/20"
               >
                 立即开启科研项目
               </button>
@@ -196,7 +196,7 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.12]"></div>
         
         {/* Glow continuation from Hero */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[300px] bg-[radial-gradient(ellipse_at_top,rgba(249,168,38,0.15)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[300px] bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.15)_0%,transparent_70%)] pointer-events-none" />
         
         {/* Floating tech nodes for cohesion */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -270,7 +270,7 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-4xl font-bold mb-8">严谨的科研流程</h2>
-                <p className="text-gray-400 mb-12">
+                <p className="text-slate-600 mb-12">
                   我们建立了一套标准化、闭环式的服务体系，确保每一个项目从初始方案设计到最终结果交付都具备极高的科学价值与严密性。
                 </p>
               </motion.div>
@@ -336,7 +336,7 @@ const FloatingBioElements = () => {
               height: 110 + i * 40,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              backgroundImage: `linear-gradient(120deg, rgba(249,168,38,0.25), transparent)`,
+              backgroundImage: `linear-gradient(120deg, rgba(16,185,129,0.25), transparent)`,
               animationDelay: `${i}s`,
               animationDuration: `${25 + i * 5}s`
            }}
@@ -362,16 +362,16 @@ const FloatingBioElements = () => {
 
 const ServiceCard = ({ icon, title, description, items, delay = 0 }: { icon: React.ReactNode, title: string, description: string, items: string[], delay?: number }) => (
   <div 
-    className="bg-primary/80 p-8 rounded-3xl border border-white/10 hover:border-sunrise/40 transition-all group"
+    className="bg-primary/80 p-8 rounded-3xl border border-slate-200 hover:border-sunrise/40 transition-all group"
   >
     <div className="text-sunrise mb-6 bg-sunrise/10 w-fit p-4 rounded-2xl group-hover:bg-sunrise group-hover:text-primary transition-colors">
       {icon}
     </div>
     <h3 className="text-2xl font-bold mb-4">{title}</h3>
-    <p className="text-gray-400 mb-8">{description}</p>
+    <p className="text-slate-600 mb-8">{description}</p>
     <ul className="space-y-3">
       {items.map((item, i) => (
-        <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
+        <li key={i} className="flex items-center gap-2 text-sm text-slate-700">
           <ChevronRight size={14} className="text-accent" />
           {item}
         </li>
@@ -387,7 +387,7 @@ const WorkflowStep = ({ num, title, desc, delay = 0 }: { num: string, title: str
     <span className="text-2xl font-bold text-accent/30 group-hover:text-accent transition-colors">{num}</span>
     <div>
       <h4 className="text-xl font-bold mb-1">{title}</h4>
-      <p className="text-gray-400 text-sm">{desc}</p>
+      <p className="text-slate-600 text-sm">{desc}</p>
     </div>
   </div>
 );
@@ -418,12 +418,12 @@ const DataMonitor = () => {
 
   return (
     <div className="fixed bottom-8 right-8 z-40 w-72 md:w-80 glass-panel p-4 rounded-2xl border-sunrise/30 text-[10px] font-mono hidden lg:block overflow-hidden">
-      <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2">
+      <div className="flex items-center justify-between mb-3 border-b border-slate-200 pb-2">
         <div className="flex items-center gap-2">
            <div className="w-2 h-2 bg-sunrise rounded-full animate-pulse"></div>
            <span className="text-sunrise font-bold uppercase tracking-widest">Live Research Monitor</span>
         </div>
-        <span className="text-gray-500">v4.0.2-BENXU</span>
+        <span className="text-slate-500">v4.0.2-BENXU</span>
       </div>
       
       <div className="space-y-1.5 mb-4">
@@ -435,7 +435,7 @@ const DataMonitor = () => {
               key={log + i} 
               initial={{ opacity: 0, x: -10 }} 
               animate={{ opacity: 1 - i * 0.2, x: 0 }}
-              className={i === 0 ? "text-accent" : "text-gray-500"}
+              className={i === 0 ? "text-accent" : "text-slate-500"}
             >
               {`> ${log}`}
             </motion.div>
@@ -444,20 +444,20 @@ const DataMonitor = () => {
       </div>
 
       <div className="space-y-1">
-        <div className="flex justify-between text-[8px] text-gray-500 uppercase">
+        <div className="flex justify-between text-[8px] text-slate-500 uppercase">
           <span>Processing Threads</span>
           <span>{progress}%</span>
         </div>
-        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+        <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
           <motion.div 
             animate={{ scaleX: progress / 100 }}
             style={{ transformOrigin: 'left' }}
-            className="w-full h-full bg-gradient-to-r from-accent to-sunrise shadow-[0_0_10px_rgba(249,168,38,0.5)]"
+            className="w-full h-full bg-gradient-to-r from-accent to-sunrise shadow-[0_0_10px_rgba(16,185,129,0.5)]"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 mt-3 gap-2 border-t border-white/10 pt-2 text-[8px] text-gray-500">
+      <div className="grid grid-cols-2 mt-3 gap-2 border-t border-slate-200 pt-2 text-[8px] text-slate-500">
         <div>LATENCY: 14ms</div>
         <div>UPLINK: 4.8 GB/s</div>
       </div>
@@ -516,7 +516,7 @@ const ServicesPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">全方位技术服务</h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
               整合干湿实验资源，将海量原始数据转化为精准结论。助力每一个科研灵感的落地。
             </p>
           </motion.div>
@@ -547,7 +547,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group"
             >
-               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.15) 0%, transparent 70%)' }}></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')]"></div>
                   <div className="absolute inset-0 bg-gradient-to-br from-sunrise/5 to-transparent"></div>
@@ -579,12 +579,12 @@ const ServicesPage = () => {
                       <Database className="text-sunrise w-16 h-16" />
                       <div 
                         className="absolute -inset-4 rounded-full -z-10 animate-glow-pulse"
-                        style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.6) 0%, transparent 70%)', animationDuration: '2s' }}
+                        style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.6) 0%, transparent 70%)', animationDuration: '2s' }}
                       />
                     </div>
                     <div className="flex gap-2">
                        {[0, 1, 2, 3].map(i => (
-                         <div key={i} className="w-8 h-1.5 bg-white/10 rounded-full overflow-hidden relative">
+                         <div key={i} className="w-8 h-1.5 bg-slate-200 rounded-full overflow-hidden relative">
                             <div 
                               className="absolute top-0 left-0 w-full h-full bg-sunrise animate-slide-fast"
                               style={{ animationDuration: '1.5s', animationDelay: `${i * 0.2}s` }}
@@ -629,7 +629,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group md:order-1"
             >
-               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(23,215,160,0.1) 0%, transparent 70%)' }}></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-50" style={{ background: 'radial-gradient(circle, rgba(2,132,199,0.1) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-accent/20 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-tr from-sunrise/20 to-transparent"></div>
                   
@@ -659,7 +659,7 @@ const ServicesPage = () => {
                     </div>
                     <div 
                       className="absolute top-0 w-6 h-6 rounded-full animate-float-simple"
-                      style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.8) 0%, transparent 70%)', animationDuration: '2s' }}
+                      style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.8) 0%, transparent 70%)', animationDuration: '2s' }}
                     />
                   </div>
                   
@@ -669,8 +669,8 @@ const ServicesPage = () => {
                      <Dna className="absolute inset-0 text-sunrise/10 w-full h-full" />
                   </div>
                   
-                  <div className="absolute top-6 left-8 w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 shadow-[0_0_15px_rgba(23,215,160,0.2)]">
-                    <Microscope className="text-accent w-10 h-10 drop-shadow-[0_0_10px_rgba(23,215,160,0.5)]" />
+                  <div className="absolute top-6 left-8 w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 shadow-[0_0_15px_rgba(2,132,199,0.2)]">
+                    <Microscope className="text-accent w-10 h-10 drop-shadow-[0_0_10px_rgba(2,132,199,0.5)]" />
                   </div>
                </div>
             </motion.div>
@@ -698,7 +698,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.8 }}
               className="relative group"
             >
-               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-40" style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.1) 0%, transparent 70%)' }}></div>
+               <div className="absolute inset-0 rounded-full group-hover:opacity-100 transition-opacity opacity-40" style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%)' }}></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-sunrise/10 via-transparent to-transparent"></div>
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-[0.15]"></div>
@@ -731,7 +731,7 @@ const ServicesPage = () => {
                     <Globe className="text-sunrise w-28 h-28 animate-[spin_30s_linear_infinite]" />
                     <div 
                       className="absolute -inset-4 rounded-full -z-10 animate-breathe"
-                      style={{ background: 'radial-gradient(circle, rgba(249,168,38,0.3) 0%, transparent 70%)', animationDuration: '2s' }}
+                      style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.3) 0%, transparent 70%)', animationDuration: '2s' }}
                     />
                   </div>
                </div>
@@ -744,11 +744,11 @@ const ServicesPage = () => {
 };
 
 const ServiceDetailItem = ({ title, items }: { title: string, items: string[] }) => (
-  <div className="border-b border-white/5 py-6">
+  <div className="border-b border-slate-100 py-6">
     <h4 className="text-xl font-bold mb-3 text-accent">{title}</h4>
     <div className="flex flex-wrap gap-2">
       {items.map((item, i) => (
-        <span key={i} className="bg-white/5 px-3 py-1 rounded-md text-sm text-gray-400">
+        <span key={i} className="bg-slate-100 px-3 py-1 rounded-md text-sm text-slate-600">
           {item}
         </span>
       ))}
@@ -783,7 +783,7 @@ const AboutPage = () => {
               <div className="lg:w-1/2">
                 <BenxuParticleText />
                 
-                <p className="text-xl text-gray-300 mb-6 font-medium leading-relaxed mt-4">
+                <p className="text-xl text-slate-700 mb-6 font-medium leading-relaxed mt-4">
                   本旭生物 (Benxu Biotech) ，立足于生命科学之本，深耕“生信大数据+前沿生物实验”双驱动领域。我们坚持以数据洞察生命的底层逻辑，用实验验证科研的真实价值。
                 </p>
                 <div className="space-y-8 mt-12">
@@ -792,11 +792,11 @@ const AboutPage = () => {
                   >
                     <div className="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-accent animate-ping opacity-50"></div>
                     <div className="absolute -left-1 top-2.5 w-2 h-2 rounded-full bg-white"></div>
-                    <h3 className="text-2xl font-bold mb-2 text-white flex items-center gap-2">
+                    <h3 className="text-2xl font-bold mb-2 text-slate-900 flex items-center gap-2">
                        <Database className="text-accent w-6 h-6" /> 
                        数据驱动发现
                     </h3>
-                    <p className="text-gray-400">掌握海量生物信息与核心处理算法，为复杂的科研假设提供精准、高效的数据支撑。</p>
+                    <p className="text-slate-600">掌握海量生物信息与核心处理算法，为复杂的科研假设提供精准、高效的数据支撑。</p>
                   </div>
                   <div 
                     className="border-l-4 border-sunrise pl-6 group relative"
@@ -807,28 +807,28 @@ const AboutPage = () => {
                        <FlaskConical className="text-sunrise w-6 h-6" />
                        实验验证真理
                     </h3>
-                    <p className="text-gray-400">配备高标准实验室及临床研究支持工具，严谨执行从细胞开发到临床前的系列验证流程。</p>
+                    <p className="text-slate-600">配备高标准实验室及临床研究支持工具，严谨执行从细胞开发到临床前的系列验证流程。</p>
                   </div>
                 </div>
               </div>
               <div 
                 className="lg:w-1/2 w-full relative"
               >
-                 <div className="absolute -inset-10 rounded-full" style={{ background: 'radial-gradient(circle, rgba(23,215,160,0.05) 0%, transparent 70%)' }}></div>
+                 <div className="absolute -inset-10 rounded-full" style={{ background: 'radial-gradient(circle, rgba(2,132,199,0.05) 0%, transparent 70%)' }}></div>
                  <div className="grid grid-cols-2 gap-4 relative z-10">
                     <div 
                       className="aspect-square bg-accent/5 border border-accent/20 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden group hover:scale-105 transition-transform"
                     >
                        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/microbial-mat.png')]"></div>
                        <Dna size={60} className="text-accent mb-4 group-hover:scale-110 transition-transform duration-500" />
-                       <span className="font-bold text-lg text-white">基因构筑</span>
+                       <span className="font-bold text-lg text-slate-900">基因构筑</span>
                     </div>
                     
                     <div 
-                      className="aspect-square bg-gradient-to-br from-accent/40 to-transparent border border-accent/30 rounded-3xl flex items-center justify-center p-6 text-primary font-bold text-3xl leading-tight relative overflow-hidden hover:scale-105 transition-transform bg-primary"
+                      className="aspect-square bg-gradient-to-br from-accent/40 to-transparent border border-accent/30 rounded-3xl flex items-center justify-center p-6 text-slate-900 font-bold text-3xl leading-tight relative overflow-hidden hover:scale-105 transition-transform bg-primary"
                     >
-                       <div className="absolute right-0 top-0 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(23,215,160,0.3) 0%, transparent 70%)' }}></div>
-                       <span className="text-white relative z-10 drop-shadow-md">生信分析<br/>核心链</span>
+                       <div className="absolute right-0 top-0 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(2,132,199,0.3) 0%, transparent 70%)' }}></div>
+                       <span className="text-slate-900 relative z-10 drop-shadow-md">生信分析<br/>核心链</span>
                     </div>
                     
                     <div 
@@ -839,7 +839,7 @@ const AboutPage = () => {
                     </div>
                     
                     <div 
-                      className="aspect-square bg-gray-800 rounded-3xl overflow-hidden relative group hover:scale-105 transition-transform"
+                      className="aspect-square bg-slate-100 rounded-3xl overflow-hidden relative group hover:scale-105 transition-transform"
                     >
                        <div className="absolute inset-0 bg-accent/20 group-hover:bg-accent/0 transition-all duration-500 z-10"></div>
                        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=400" alt="lab" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -878,9 +878,9 @@ const AboutPage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-300"
+          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-700"
         >
-           <h2 className="text-3xl font-bold text-white mb-8">联系我们合作</h2>
+           <h2 className="text-3xl font-bold text-slate-900 mb-8">联系我们合作</h2>
            <p className="mb-12">
              无论您在生信分析上有任何疑难杂症，还是需要高水准的湿实验支持，本旭生物专家团队期待为您提供专业、可靠、快速的响应方案。
            </p>
@@ -895,7 +895,7 @@ const AboutPage = () => {
 
 const BadgeCard = ({ icon, title, delay = 0 }: { icon: React.ReactNode, title: string, delay?: number }) => (
   <div 
-    className="bg-white/5 p-8 rounded-3xl text-center border border-white/5 hover:border-accent/30 transition-all group"
+    className="bg-slate-100 p-8 rounded-3xl text-center border border-slate-100 hover:border-accent/30 transition-all group"
   >
     <div className="mb-4 text-accent flex justify-center transform group-hover:scale-110 transition-transform">
       {React.cloneElement(icon as React.ReactElement, { size: 48 })}

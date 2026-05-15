@@ -48,7 +48,7 @@ export const ParticleNetwork: React.FC = () => {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.isSunrise ? `rgba(249, 168, 38, ${this.alpha})` : `rgba(23, 215, 160, ${this.alpha})`;
+        ctx.fillStyle = this.isSunrise ? `rgba(16, 185, 129, ${this.alpha})` : `rgba(2, 132, 199, ${this.alpha})`;
         ctx.fill();
       }
     }
@@ -103,7 +103,7 @@ export const ParticleNetwork: React.FC = () => {
       draw() {
         if (!ctx) return;
         ctx.font = `bold ${this.size}px monospace`;
-        ctx.fillStyle = this.isSunrise ? `rgba(249, 168, 38, ${this.alpha})` : `rgba(23, 215, 160, ${this.alpha})`;
+        ctx.fillStyle = this.isSunrise ? `rgba(16, 185, 129, ${this.alpha})` : `rgba(2, 132, 199, ${this.alpha})`;
         ctx.fillText(this.char, this.x, this.y);
       }
     }
@@ -138,8 +138,8 @@ export const ParticleNetwork: React.FC = () => {
           z: zLine,
           draw: () => {
             const grad = ctx.createLinearGradient(x1, y, x2, y);
-            grad.addColorStop(0, `rgba(23, 215, 160, ${lineAlpha})`);
-            grad.addColorStop(1, `rgba(249, 168, 38, ${lineAlpha})`);
+            grad.addColorStop(0, `rgba(2, 132, 199, ${lineAlpha})`);
+            grad.addColorStop(1, `rgba(16, 185, 129, ${lineAlpha})`);
             
             ctx.beginPath();
             ctx.moveTo(x1, y);
@@ -159,13 +159,13 @@ export const ParticleNetwork: React.FC = () => {
             // Glow layer
             ctx.beginPath();
             ctx.arc(x1, y, size1 * 3, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(23, 215, 160, ${alpha1 * 0.2})`;
+            ctx.fillStyle = `rgba(2, 132, 199, ${alpha1 * 0.2})`;
             ctx.fill();
             
             // Base layer
             ctx.beginPath();
             ctx.arc(x1, y, size1, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(23, 215, 160, ${alpha1})`;
+            ctx.fillStyle = `rgba(2, 132, 199, ${alpha1})`;
             ctx.fill();
             // Core bright dot for depth
             ctx.beginPath();
@@ -184,13 +184,13 @@ export const ParticleNetwork: React.FC = () => {
             // Glow layer
             ctx.beginPath();
             ctx.arc(x2, y, size2 * 3, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(249, 168, 38, ${alpha2 * 0.2})`;
+            ctx.fillStyle = `rgba(16, 185, 129, ${alpha2 * 0.2})`;
             ctx.fill();
 
             // Base layer
             ctx.beginPath();
             ctx.arc(x2, y, size2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(249, 168, 38, ${alpha2})`;
+            ctx.fillStyle = `rgba(16, 185, 129, ${alpha2})`;
             ctx.fill();
             // Core bright dot for depth
             ctx.beginPath();
@@ -233,16 +233,16 @@ export const ParticleNetwork: React.FC = () => {
         canvas.width / 2, canvas.height * 0.8, 0,
         canvas.width / 2, canvas.height * 0.8, canvas.width * 0.6
       );
-      gradient.addColorStop(0, 'rgba(249, 168, 38, 0.08)');
-      gradient.addColorStop(0.3, 'rgba(23, 215, 160, 0.03)');
-      gradient.addColorStop(1, 'rgba(10, 36, 31, 0)');
+      gradient.addColorStop(0, 'rgba(16, 185, 129, 0.08)');
+      gradient.addColorStop(0.3, 'rgba(2, 132, 199, 0.03)');
+      gradient.addColorStop(1, 'rgba(248, 250, 252, 0)');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Bottom horizon glow
       const horizonGradient = ctx.createLinearGradient(0, canvas.height, 0, canvas.height * 0.7);
-      horizonGradient.addColorStop(0, 'rgba(249, 168, 38, 0.06)');
-      horizonGradient.addColorStop(1, 'rgba(249, 168, 38, 0)');
+      horizonGradient.addColorStop(0, 'rgba(16, 185, 129, 0.06)');
+      horizonGradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
       ctx.fillStyle = horizonGradient;
       ctx.fillRect(0, canvas.height * 0.7, canvas.width, canvas.height * 0.3);
 

@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0A241F;
-  --color-accent: #17D7A0;
-  --color-sunrise: #F9A826;
-  --color-dark: #040F0D;
-  --color-emerald-deep: #0D5C4A;
+  --color-primary: #FFFFFF;
+  --color-accent: #0284C7;
+  --color-sunrise: #10B981;
+  --color-dark: #F8FAFC;
+  --color-emerald-deep: #E0F2FE;
 }
 
 @layer base {
   body {
-    @apply text-white font-sans antialiased min-h-screen relative overflow-x-hidden;
-    background: radial-gradient(circle at 50% 120%, #0D5C4A 0%, #0A241F 50%, #040F0D 100%);
+    @apply text-slate-800 font-sans antialiased min-h-screen relative overflow-x-hidden;
+    background: #FFFFFF;
   }
 }
 
@@ -79,11 +79,11 @@
 }
 
 .glow-text-sunrise {
-  text-shadow: 0 0 20px rgba(249, 168, 38, 0.4);
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
 .glow-border-sunrise {
-  box-shadow: 0 0 15px rgba(249, 168, 38, 0.15);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
 }
 
 .sunrise-gradient {
@@ -91,11 +91,11 @@
 }
 
 .sunrise-glow-radial {
-  background: radial-gradient(circle, rgba(249, 168, 38, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
 }
 
 .glass-panel {
-  @apply bg-primary/80 border border-emerald-900/30;
+  @apply bg-primary/80 border border-slate-200;
 }
 
 .gradient-text {
@@ -107,10 +107,10 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #010D0A;
+  background: #F8FAFC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #39FF14;
+  background: #0EA5E9;
   border-radius: 10px;
 }
