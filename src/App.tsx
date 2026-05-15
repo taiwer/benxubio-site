@@ -192,7 +192,30 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         </div>
       </section>
 
-      <div className="relative bg-dark">
+      <div className="relative bg-gradient-to-b from-dark via-primary/30 to-dark">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.12]"></div>
+        
+        {/* Glow continuation from Hero */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[300px] bg-[radial-gradient(ellipse_at_top,rgba(223,255,0,0.15)_0%,transparent_70%)] pointer-events-none" />
+        
+        {/* Floating tech nodes for cohesion */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(12)].map((_, i) => (
+             <div
+               key={`bg-node-${i}`}
+               className={`absolute rounded-full border ${i % 2 === 0 ? 'border-accent/15' : 'border-sunrise/15'} animate-breathe`}
+               style={{
+                 left: `${Math.random() * 100}%`,
+                 top: `${Math.random() * 40}%`, // Keep nodes mainly in the second section (top 40% of the wrapper)
+                 width: `${Math.random() * 100 + 30}px`,
+                 height: `${Math.random() * 100 + 30}px`,
+                 animationDuration: `${Math.random() * 10 + 5}s`,
+                 animationDelay: `${Math.random() * 5}s`
+               }}
+             />
+          ))}
+        </div>
+
         <FloatingBioElements />
         
         {/* Core Services Preview */}
@@ -236,7 +259,7 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         </section>
 
         {/* Workflow */}
-        <section className="py-32 relative z-10 bg-primary/40 border-t border-b border-white/5">
+        <section className="py-32 relative z-10 border-t border-b border-accent/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-20">
             <div className="md:w-1/2">
@@ -444,10 +467,48 @@ const DataMonitor = () => {
 
 const ServicesPage = () => {
   return (
-    <div className="pt-20">
+    <div className="pt-20 bg-gradient-to-b from-primary to-dark relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-30">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        
+        {/* Floating Cellular/Tech Nodes */}
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={`service-bg-${i}`}
+            className={`absolute rounded-full border flex items-center justify-center animate-breathe ${i % 2 === 0 ? 'border-accent/20' : 'border-sunrise/20'}`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 80 + 20}px`,
+              height: `${Math.random() * 80 + 20}px`,
+              animationDuration: `${Math.random() * 8 + 5}s`,
+              animationDelay: `${Math.random() * 5}s`
+            }}
+          />
+        ))}
+
+        {/* Floating connection lines */}
+        {[...Array(10)].map((_, i) => (
+           <div 
+             key={`line-${i}`}
+             className="absolute bg-gradient-to-r from-transparent via-accent/20 to-transparent animate-slide-fast"
+             style={{
+               left: `${Math.random() * 100}%`,
+               top: `${Math.random() * 100}%`,
+               width: `${Math.random() * 300 + 100}px`,
+               height: '1px',
+               transform: `rotate(${Math.random() * 360}deg)`,
+               animationDuration: `${Math.random() * 10 + 10}s`,
+               animationDelay: `${Math.random() * 5}s`
+             }}
+           />
+        ))}
+      </div>
+
       <DataMonitor />
-      <section className="py-24 bg-gradient-to-b from-primary to-dark relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
+      
+      <section className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -462,7 +523,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32">
           {/* Category 1 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -697,27 +758,27 @@ const ServiceDetailItem = ({ title, items }: { title: string, items: string[] })
 
 const AboutPage = () => {
   return (
-    <div className="pt-20">
-      <section className="py-24 bg-gradient-to-b from-primary to-dark relative overflow-hidden">
-        {/* Animated cell background */}
-        <div className="absolute inset-0 pointer-events-none opacity-40">
-           {[...Array(15)].map((_, i) => (
-             <div
-               key={i}
-               className="absolute rounded-full border border-accent/30 flex items-center justify-center animate-breathe"
-               style={{
-                 left: `${Math.random() * 100}%`,
-                 top: `${Math.random() * 100}%`,
-                 width: `${Math.random() * 60 + 30}px`,
-                 height: `${Math.random() * 60 + 30}px`,
-                 animationDuration: `${Math.random() * 8 + 5}s`,
-                 animationDelay: `${Math.random() * 5}s`
-               }}
-             />
-           ))}
-        </div>
+    <div className="pt-20 bg-gradient-to-b from-primary to-dark relative overflow-hidden">
+      {/* Animated cell background */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+         {[...Array(25)].map((_, i) => (
+           <div
+             key={i}
+             className="absolute rounded-full border border-accent/30 flex items-center justify-center animate-breathe"
+             style={{
+               left: `${Math.random() * 100}%`,
+               top: `${Math.random() * 100}%`,
+               width: `${Math.random() * 60 + 30}px`,
+               height: `${Math.random() * 60 + 30}px`,
+               animationDuration: `${Math.random() * 8 + 5}s`,
+               animationDelay: `${Math.random() * 5}s`
+             }}
+           />
+         ))}
+      </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="py-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="flex flex-col lg:flex-row gap-16 items-center">
               <div className="lg:w-1/2">
                 <BenxuParticleText />
@@ -789,7 +850,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <motion.div 
              initial={{ opacity: 0, y: 20 }}
@@ -811,7 +872,7 @@ const AboutPage = () => {
         </div>
       </section>
       
-      <section className="py-24 bg-primary/20">
+      <section className="py-24 relative z-10 bg-primary/20 bg-opacity-50 backdrop-blur-sm mt-12 border-t border-accent/10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
