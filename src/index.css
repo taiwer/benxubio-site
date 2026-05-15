@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #021B15;
+  --color-accent: #39FF14;
+  --color-sunrise: #DFFF00;
+  --color-dark: #010D0A;
+  --color-emerald-deep: #064e3b;
+}
+
+@layer base {
+  body {
+    @apply text-white font-sans antialiased min-h-screen relative overflow-x-hidden;
+    background: radial-gradient(circle at 50% 120%, #064e3b 0%, #021B15 50%, #010D0A 100%);
+  }
+}
+
+.glow-text-sunrise {
+  text-shadow: 0 0 20px rgba(223, 255, 0, 0.4);
+}
+
+.glow-border-sunrise {
+  box-shadow: 0 0 15px rgba(223, 255, 0, 0.15);
+}
+
+.sunrise-gradient {
+  @apply bg-gradient-to-tr from-accent to-sunrise;
+}
+
+.sunrise-glow-radial {
+  background: radial-gradient(circle, rgba(223, 255, 0, 0.15) 0%, transparent 70%);
+}
+
+.glass-panel {
+  @apply bg-primary/40 backdrop-blur-xl border border-emerald-900/30;
+}
+
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-accent to-sunrise;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #010D0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #39FF14;
+  border-radius: 10px;
+}
