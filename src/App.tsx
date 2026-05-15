@@ -194,55 +194,80 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         </div>
       </section>
 
-      {/* Core Services Preview */}
-      <section className="py-32 relative bg-dark">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">核心业务领域</h2>
-            <div className="w-20 h-1.5 bg-sunrise mx-auto rounded-full mb-6"></div>
-          </div>
+      <div className="relative bg-dark">
+        <FloatingBioElements />
+        
+        {/* Core Services Preview */}
+        <section className="py-32 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">核心业务领域</h2>
+              <div className="w-20 h-1.5 bg-sunrise mx-auto rounded-full mb-6"></div>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <ServiceCard 
-              icon={<Database className="w-10 h-10" />}
-              title="生信科研服务"
-              description="数据处理、组学分析、生信软件定制开发。从NGS到底层数据挖掘，全方位数字化分析。"
-              items={['高通量测序分析', '多组学整合分析', '生信软件开发']}
-            />
-            <ServiceCard 
-              icon={<Microscope className="w-10 h-10" />}
-              title="生物实验研发"
-              description="细胞技术研发、工业酶制剂及医学试验验证。专业的干湿实验验证闭环服务。"
-              items={['细胞技术应用', '工业酶制剂研发', '临床前研究']}
-            />
-            <ServiceCard 
-              icon={<Globe className="w-10 h-10" />}
-              title="科研支撑供应"
-              description="高端科研仪器销售、实验室耗材供应及进出口贸易服务。保障科研基础设施与全球资源配置。"
-              items={['仪器设备销售', '科研耗材供应', '进出口贸易服务']}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <ServiceCard 
+                delay={0.1}
+                icon={<Database className="w-10 h-10" />}
+                title="生信科研服务"
+                description="数据处理、组学分析、生信软件定制开发。从NGS到底层数据挖掘，全方位数字化分析。"
+                items={['高通量测序分析', '多组学整合分析', '生信软件开发']}
+              />
+              <ServiceCard 
+                delay={0.3}
+                icon={<Microscope className="w-10 h-10" />}
+                title="生物实验研发"
+                description="细胞技术研发、工业酶制剂及医学试验验证。专业的干湿实验验证闭环服务。"
+                items={['细胞技术应用', '工业酶制剂研发', '临床前研究']}
+              />
+              <ServiceCard 
+                delay={0.5}
+                icon={<Globe className="w-10 h-10" />}
+                title="科研支撑供应"
+                description="高端科研仪器销售、实验室耗材供应及进出口贸易服务。保障科研基础设施与全球资源配置。"
+                items={['仪器设备销售', '科研耗材供应', '进出口贸易服务']}
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Workflow */}
-      <section className="py-32 bg-primary/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Workflow */}
+        <section className="py-32 relative z-10 bg-primary/20 backdrop-blur-sm border-t border-b border-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-20">
             <div className="md:w-1/2">
-              <h2 className="text-4xl font-bold mb-8">严谨的科研流程</h2>
-              <p className="text-gray-400 mb-12">
-                我们建立了一套标准化、闭环式的服务体系，确保每一个项目从初始方案设计到最终结果交付都具备极高的科学价值与严密性。
-              </p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-4xl font-bold mb-8">严谨的科研流程</h2>
+                <p className="text-gray-400 mb-12">
+                  我们建立了一套标准化、闭环式的服务体系，确保每一个项目从初始方案设计到最终结果交付都具备极高的科学价值与严密性。
+                </p>
+              </motion.div>
               
               <div className="space-y-6">
-                <WorkflowStep num="01" title="需求沟通" desc="专业生信专家一对一深度对接，明确科研目标与痛点。" />
-                <WorkflowStep num="02" title="方案设计" desc="定制化实验设计与分析流程，科学预估结果与产出。" />
-                <WorkflowStep num="03" title="实验/分析" desc="高标准实验室操作与高性能计算集群数据产出。" />
-                <WorkflowStep num="04" title="交付支持" desc="详尽报告解读、学术图表制作及后续技术协助。" />
+                <WorkflowStep delay={0.1} num="01" title="需求沟通" desc="专业生信专家一对一深度对接，明确科研目标与痛点。" />
+                <WorkflowStep delay={0.2} num="02" title="方案设计" desc="定制化实验设计与分析流程，科学预估结果与产出。" />
+                <WorkflowStep delay={0.3} num="03" title="实验/分析" desc="高标准实验室操作与高性能计算集群数据产出。" />
+                <WorkflowStep delay={0.4} num="04" title="交付支持" desc="详尽报告解读、学术图表制作及后续技术协助。" />
               </div>
             </div>
-            <div className="md:w-1/2 relative">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="md:w-1/2 relative"
+            >
                <div className="aspect-square bg-accent/5 rounded-full border border-accent/20 flex items-center justify-center p-12">
                   <div className="w-full h-full border border-accent/40 rounded-full flex items-center justify-center relative spin-slow">
                     <Activity className="text-accent w-24 h-24 absolute top-0 -translate-y-1/2" />
@@ -255,17 +280,93 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
                     </div>
                   </div>
                </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };
 
-const ServiceCard = ({ icon, title, description, items }: { icon: React.ReactNode, title: string, description: string, items: string[] }) => (
-  <motion.div 
-    whileHover={{ y: -10 }}
+const FloatingBioElements = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+           key={`dna-${i}`}
+           className="absolute text-accent/60 drop-shadow-[0_0_15px_rgba(57,255,20,0.5)]"
+           style={{
+              left: `${10 + Math.random() * 80}%`,
+              top: `${Math.random() * 100}%`,
+           }}
+           animate={{
+              y: [0, -100, 0],
+              rotate: [0, 180, 360],
+              opacity: [0.4, 1, 0.4]
+           }}
+           transition={{
+              duration: 30 + Math.random() * 20,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 10
+           }}
+        >
+          <Dna size={120 + Math.random() * 200} />
+        </motion.div>
+      ))}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+           key={`hex-${i}`}
+           className="absolute border border-sunrise/60 rounded-xl shadow-[0_0_20px_rgba(223,255,0,0.3)] backdrop-blur-sm"
+           style={{
+              width: 100 + i * 40,
+              height: 110 + i * 40,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              backgroundImage: `linear-gradient(120deg, rgba(223,255,0,0.25), transparent)`
+           }}
+           animate={{
+              y: [0, 80, 0],
+              x: [0, 40, 0],
+              rotate: [0, 90, 180],
+              opacity: [0.5, 1, 0.5]
+           }}
+           transition={{
+              duration: 25 + i * 5,
+              repeat: Infinity,
+              ease: "easeInOut"
+           }}
+        />
+      ))}
+      {[...Array(4)].map((_, i) => (
+        <motion.div
+           key={`flask-${i}`}
+           className="absolute text-accent/60 backdrop-blur-3xl drop-shadow-[0_0_15px_rgba(57,255,20,0.5)]"
+           style={{
+              left: `${20 + Math.random() * 60}%`,
+              top: `${Math.random() * 100}%`,
+           }}
+           animate={{
+              y: [0, 150, 0],
+              rotate: [-15, 15, -15],
+              opacity: [0.4, 0.9, 0.4]
+           }}
+           transition={{
+              duration: 35 + Math.random() * 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+           }}
+        >
+           <FlaskConical size={80 + Math.random() * 100} />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+const ServiceCard = ({ icon, title, description, items, delay = 0 }: { icon: React.ReactNode, title: string, description: string, items: string[], delay?: number }) => (
+  <div 
     className="bg-primary/50 p-8 rounded-3xl border border-white/10 hover:border-sunrise/40 transition-all group backdrop-blur-md"
   >
     <div className="text-sunrise mb-6 bg-sunrise/10 w-fit p-4 rounded-2xl group-hover:bg-sunrise group-hover:text-primary transition-colors">
@@ -281,11 +382,13 @@ const ServiceCard = ({ icon, title, description, items }: { icon: React.ReactNod
         </li>
       ))}
     </ul>
-  </motion.div>
+  </div>
 );
 
-const WorkflowStep = ({ num, title, desc }: { num: string, title: string, desc: string }) => (
-  <div className="flex gap-6 items-start group">
+const WorkflowStep = ({ num, title, desc, delay = 0 }: { num: string, title: string, desc: string, delay?: number }) => (
+  <div 
+    className="flex gap-6 items-start group"
+  >
     <span className="text-2xl font-bold text-accent/30 group-hover:text-accent transition-colors">{num}</span>
     <div>
       <h4 className="text-xl font-bold mb-1">{title}</h4>
@@ -403,7 +506,13 @@ const ServicesPage = () => {
                  <ServiceDetailItem title="定制开发" items={['科研软件定制开发', '生信工具销售', '计算设备零售/批发']} />
                </div>
             </motion.div>
-            <div className="relative group">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative group"
+            >
                <div className="absolute inset-0 bg-sunrise/20 blur-[100px] rounded-full group-hover:opacity-100 transition-opacity opacity-50"></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')]"></div>
@@ -462,7 +571,7 @@ const ServicesPage = () => {
                      />
                   </Activity>
                </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Category 2 */}
@@ -481,7 +590,13 @@ const ServicesPage = () => {
                  <ServiceDetailItem title="转化服务" items={['技术转让与交流', '学术翻译服务', '技术成果推广']} />
                </div>
             </motion.div>
-            <div className="relative group md:order-1">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative group md:order-1"
+            >
                <div className="absolute inset-0 bg-accent/10 blur-[100px] rounded-full group-hover:opacity-100 transition-opacity opacity-50"></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-accent/20 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-tr from-sunrise/20 to-transparent"></div>
@@ -540,7 +655,7 @@ const ServicesPage = () => {
                     <Microscope className="text-accent w-10 h-10 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]" />
                   </div>
                </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Category 3 */}
@@ -558,7 +673,13 @@ const ServicesPage = () => {
                  <ServiceDetailItem title="国际贸易" items={['货物进出口业务', '技术引进与外输']} />
                </div>
             </motion.div>
-            <div className="relative group">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative group"
+            >
                <div className="absolute inset-0 bg-sunrise/10 blur-[120px] rounded-full group-hover:opacity-100 transition-opacity opacity-40"></div>
                <div className="relative glass-panel aspect-video rounded-3xl flex items-center justify-center border border-sunrise/20 overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-sunrise/10 via-transparent to-transparent"></div>
@@ -601,7 +722,7 @@ const ServicesPage = () => {
                     />
                   </div>
                </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -662,7 +783,9 @@ const AboutPage = () => {
                   本旭生物 (Benxu Biotech) ，立足于生命科学之本，深耕“生信大数据+前沿生物实验”双驱动领域。我们坚持以数据洞察生命的底层逻辑，用实验验证科研的真实价值。
                 </p>
                 <div className="space-y-8 mt-12">
-                  <div className="border-l-4 border-accent pl-6 group relative">
+                  <div 
+                    className="border-l-4 border-accent pl-6 group relative"
+                  >
                     <div className="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-accent animate-ping opacity-50"></div>
                     <div className="absolute -left-1 top-2.5 w-2 h-2 rounded-full bg-white"></div>
                     <h3 className="text-2xl font-bold mb-2 text-white flex items-center gap-2">
@@ -671,7 +794,9 @@ const AboutPage = () => {
                     </h3>
                     <p className="text-gray-400">掌握海量生物信息与核心处理算法，为复杂的科研假设提供精准、高效的数据支撑。</p>
                   </div>
-                  <div className="border-l-4 border-sunrise pl-6 group relative">
+                  <div 
+                    className="border-l-4 border-sunrise pl-6 group relative"
+                  >
                     <div className="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-sunrise animate-ping opacity-50"></div>
                     <div className="absolute -left-1 top-2.5 w-2 h-2 rounded-full bg-white"></div>
                     <h3 className="text-2xl font-bold mb-2 text-sunrise flex items-center gap-2">
@@ -682,41 +807,39 @@ const AboutPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="lg:w-1/2 w-full relative">
+              <div 
+                className="lg:w-1/2 w-full relative"
+              >
                  <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full"></div>
                  <div className="grid grid-cols-2 gap-4 relative z-10">
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      className="aspect-square bg-accent/5 border border-accent/20 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden group"
+                    <div 
+                      className="aspect-square bg-accent/5 border border-accent/20 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden group hover:scale-105 transition-transform"
                     >
                        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/microbial-mat.png')]"></div>
                        <Dna size={60} className="text-accent mb-4 group-hover:scale-110 transition-transform duration-500" />
                        <span className="font-bold text-lg text-white">基因构筑</span>
-                    </motion.div>
+                    </div>
                     
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      className="aspect-square bg-gradient-to-br from-accent/20 to-transparent border border-accent/30 rounded-3xl flex items-center justify-center p-6 text-primary font-bold text-3xl leading-tight relative overflow-hidden backdrop-blur-sm"
+                    <div 
+                      className="aspect-square bg-gradient-to-br from-accent/20 to-transparent border border-accent/30 rounded-3xl flex items-center justify-center p-6 text-primary font-bold text-3xl leading-tight relative overflow-hidden backdrop-blur-sm hover:scale-105 transition-transform"
                     >
                        <div className="absolute right-0 top-0 w-24 h-24 bg-accent/20 rounded-full blur-xl"></div>
                        <span className="text-white relative z-10 drop-shadow-md">生信分析<br/>核心链</span>
-                    </motion.div>
+                    </div>
                     
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      className="aspect-square bg-dark border border-sunrise/40 rounded-3xl flex items-center justify-center font-bold text-5xl text-sunrise relative overflow-hidden"
+                    <div 
+                      className="aspect-square bg-dark border border-sunrise/40 rounded-3xl flex items-center justify-center font-bold text-5xl text-sunrise relative overflow-hidden hover:scale-105 transition-transform"
                     >
                        <Microscope className="absolute inset-0 m-auto text-sunrise/10 w-full h-full p-4" />
                        <span className="relative z-10 glow-text-sunrise text-center">细胞<br/>工艺</span>
-                    </motion.div>
+                    </div>
                     
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      className="aspect-square bg-gray-800 rounded-3xl overflow-hidden relative group"
+                    <div 
+                      className="aspect-square bg-gray-800 rounded-3xl overflow-hidden relative group hover:scale-105 transition-transform"
                     >
                        <div className="absolute inset-0 bg-accent/20 group-hover:bg-accent/0 mix-blend-overlay transition-all duration-500 z-10"></div>
                        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=400" alt="lab" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    </motion.div>
+                    </div>
                  </div>
               </div>
            </div>
@@ -725,37 +848,51 @@ const AboutPage = () => {
 
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="text-center mb-20">
+           <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true, margin: "-50px" }}
+             transition={{ duration: 0.6 }}
+             className="text-center mb-20"
+           >
              <h2 className="text-3xl md:text-5xl font-bold mb-4">企业资质与保障</h2>
              <div className="w-20 h-1.5 bg-accent mx-auto rounded-full mb-6"></div>
-           </div>
+           </motion.div>
            
            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-             <BadgeCard icon={<Globe />} title="货物进出口证" />
-             <BadgeCard icon={<ShieldCheck />} title="一类器械备案" />
-             <BadgeCard icon={<Activity />} title="软著专利证书" />
-             <BadgeCard icon={<FlaskConical />} title="高标准实验室" />
+             <BadgeCard delay={0.1} icon={<Globe />} title="货物进出口证" />
+             <BadgeCard delay={0.2} icon={<ShieldCheck />} title="一类器械备案" />
+             <BadgeCard delay={0.3} icon={<Activity />} title="软著专利证书" />
+             <BadgeCard delay={0.4} icon={<FlaskConical />} title="高标准实验室" />
            </div>
         </div>
       </section>
       
       <section className="py-24 bg-primary/20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-300">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-300"
+        >
            <h2 className="text-3xl font-bold text-white mb-8">联系我们合作</h2>
            <p className="mb-12">
              无论您在生信分析上有任何疑难杂症，还是需要高水准的湿实验支持，本旭生物专家团队期待为您提供专业、可靠、快速的响应方案。
            </p>
-           <button className="bg-accent text-primary px-10 py-5 rounded-full font-bold text-xl shadow-lg shadow-accent/20">
+           <button className="bg-accent text-primary px-10 py-5 rounded-full font-bold text-xl shadow-lg shadow-accent/20 transition-transform hover:scale-105">
              联系技术专家
            </button>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
 };
 
-const BadgeCard = ({ icon, title }: { icon: React.ReactNode, title: string }) => (
-  <div className="bg-white/5 p-8 rounded-3xl text-center border border-white/5 hover:border-accent/30 transition-all group">
+const BadgeCard = ({ icon, title, delay = 0 }: { icon: React.ReactNode, title: string, delay?: number }) => (
+  <div 
+    className="bg-white/5 p-8 rounded-3xl text-center border border-white/5 hover:border-accent/30 transition-all group"
+  >
     <div className="mb-4 text-accent flex justify-center transform group-hover:scale-110 transition-transform">
       {React.cloneElement(icon as React.ReactElement, { size: 48 })}
     </div>
