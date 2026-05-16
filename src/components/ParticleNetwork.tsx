@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 export const ParticleNetwork: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -7,13 +7,13 @@ export const ParticleNetwork: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
     let time = 0;
-    const bases = ['A', 'T', 'G', 'C'];
-    
+    const bases = ["A", "T", "G", "C"];
+
     let floatingLetters: FloatingLetter[] = [];
     let ambientParticles: AmbientParticle[] = [];
 
@@ -48,7 +48,9 @@ export const ParticleNetwork: React.FC = () => {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.isSunrise ? `rgba(16, 185, 129, ${this.alpha})` : `rgba(2, 132, 199, ${this.alpha})`;
+        ctx.fillStyle = this.isSunrise
+          ? `rgba(16, 185, 129, ${this.alpha})`
+          : `rgba(2, 132, 199, ${this.alpha})`;
         ctx.fill();
       }
     }
@@ -59,7 +61,7 @@ export const ParticleNetwork: React.FC = () => {
       y: number = 0;
       vx: number = 0;
       vy: number = 0;
-      char: string = 'A';
+      char: string = "A";
       alpha: number = 0;
       targetAlpha: number = 0;
       size: number = 0;
@@ -85,25 +87,30 @@ export const ParticleNetwork: React.FC = () => {
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        
+
         // Fade in
         if (this.alpha < this.targetAlpha && this.y > canvas!.height * 0.2) {
-            this.alpha += 0.005;
+          this.alpha += 0.005;
         }
         // Fade out
         if (this.y < canvas!.height * 0.2) {
-            this.alpha -= 0.005;
+          this.alpha -= 0.005;
         }
         // Respawn
-        if (this.y < -50 || (this.alpha <= 0 && this.y < canvas!.height * 0.5)) {
-            this.reset();
+        if (
+          this.y < -50 ||
+          (this.alpha <= 0 && this.y < canvas!.height * 0.5)
+        ) {
+          this.reset();
         }
       }
 
       draw() {
         if (!ctx) return;
         ctx.font = `bold ${this.size}px monospace`;
-        ctx.fillStyle = this.isSunrise ? `rgba(16, 185, 129, ${this.alpha * 0.6})` : `rgba(2, 132, 199, ${this.alpha * 0.6})`;
+        ctx.fillStyle = this.isSunrise
+          ? `rgba(16, 185, 129, ${this.alpha * 0.6})`
+          : `rgba(2, 132, 199, ${this.alpha * 0.6})`;
         ctx.fillText(this.char, this.x, this.y);
       }
     }
@@ -116,7 +123,9 @@ export const ParticleNetwork: React.FC = () => {
       const renderQueue: { z: number; draw: () => void }[] = [];
 
       // Calculate number of pairs based on screen size so it always spans across
-      const numBasePairs = Math.floor(Math.max(canvas.width, canvas.height) / 20);
+      const numBasePairs = Math.floor(
+        Math.max(canvas.width, canvas.height) / 20,
+      );
       const spacing = 35;
       const helixRadius = Math.min(canvas.width * 0.2, 180);
       const startY = -(numBasePairs * spacing) / 2;
@@ -133,21 +142,21 @@ export const ParticleNetwork: React.FC = () => {
         // Connection Line (Base pair bonding)
         const zLine = (z1 + z2) / 2;
         const lineAlpha = 0.15 + ((zLine + 1) / 2) * 0.4;
-        
+
         renderQueue.push({
           z: zLine,
           draw: () => {
             const grad = ctx.createLinearGradient(x1, y, x2, y);
             grad.addColorStop(0, `rgba(2, 132, 199, ${lineAlpha})`);
             grad.addColorStop(1, `rgba(16, 185, 129, ${lineAlpha})`);
-            
+
             ctx.beginPath();
             ctx.moveTo(x1, y);
             ctx.lineTo(x2, y);
             ctx.strokeStyle = grad;
             ctx.lineWidth = 1.5;
             ctx.stroke();
-          }
+          },
         });
 
         // Node 1 (Strand 1 - Green)
@@ -161,7 +170,7 @@ export const ParticleNetwork: React.FC = () => {
             ctx.arc(x1, y, size1 * 3, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(2, 132, 199, ${alpha1 * 0.2})`;
             ctx.fill();
-            
+
             // Base layer
             ctx.beginPath();
             ctx.arc(x1, y, size1, 0, Math.PI * 2);
@@ -172,7 +181,7 @@ export const ParticleNetwork: React.FC = () => {
             ctx.arc(x1, y, size1 * 0.4, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(255, 255, 255, ${alpha1 * 0.8})`;
             ctx.fill();
-          }
+          },
         });
 
         // Node 2 (Strand 2 - Sunrise Yellow)
@@ -197,13 +206,13 @@ export const ParticleNetwork: React.FC = () => {
             ctx.arc(x2, y, size2 * 0.4, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(255, 255, 255, ${alpha2 * 0.8})`;
             ctx.fill();
-          }
+          },
         });
       }
 
       // Draw by Z-index for 3D sorting simulation
-      renderQueue.sort((a, b) => a.z - b.z).forEach(item => item.draw());
-      
+      renderQueue.sort((a, b) => a.z - b.z).forEach((item) => item.draw());
+
       ctx.restore();
     };
 
@@ -230,24 +239,33 @@ export const ParticleNetwork: React.FC = () => {
 
       // Sunrise Background Gradient
       const gradient = ctx.createRadialGradient(
-        canvas.width / 2, canvas.height * 0.8, 0,
-        canvas.width / 2, canvas.height * 0.8, canvas.width * 0.6
+        canvas.width / 2,
+        canvas.height * 0.8,
+        0,
+        canvas.width / 2,
+        canvas.height * 0.8,
+        canvas.width * 0.6,
       );
-      gradient.addColorStop(0, 'rgba(16, 185, 129, 0.08)');
-      gradient.addColorStop(0.3, 'rgba(2, 132, 199, 0.03)');
-      gradient.addColorStop(1, 'rgba(248, 250, 252, 0)');
+      gradient.addColorStop(0, "rgba(16, 185, 129, 0.08)");
+      gradient.addColorStop(0.3, "rgba(2, 132, 199, 0.03)");
+      gradient.addColorStop(1, "rgba(248, 250, 252, 0)");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Bottom horizon glow
-      const horizonGradient = ctx.createLinearGradient(0, canvas.height, 0, canvas.height * 0.7);
-      horizonGradient.addColorStop(0, 'rgba(16, 185, 129, 0.06)');
-      horizonGradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
+      const horizonGradient = ctx.createLinearGradient(
+        0,
+        canvas.height,
+        0,
+        canvas.height * 0.7,
+      );
+      horizonGradient.addColorStop(0, "rgba(16, 185, 129, 0.06)");
+      horizonGradient.addColorStop(1, "rgba(16, 185, 129, 0)");
       ctx.fillStyle = horizonGradient;
       ctx.fillRect(0, canvas.height * 0.7, canvas.width, canvas.height * 0.3);
 
       // Draw ambient particles
-      ambientParticles.forEach(p => {
+      ambientParticles.forEach((p) => {
         p.update();
         p.draw();
       });
@@ -256,7 +274,7 @@ export const ParticleNetwork: React.FC = () => {
       drawDNA();
 
       // Draw floating genetic letters
-      floatingLetters.forEach(l => {
+      floatingLetters.forEach((l) => {
         l.update();
         l.draw();
       });
@@ -264,15 +282,21 @@ export const ParticleNetwork: React.FC = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
     animate();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none opacity-80" style={{ willChange: 'transform' }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 pointer-events-none opacity-80"
+      style={{ willChange: "transform" }}
+    />
+  );
 };

@@ -1,84 +1,193 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #FFFFFF;
-  --color-accent: #0284C7;
-  --color-sunrise: #10B981;
-  --color-dark: #F8FAFC;
-  --color-emerald-deep: #E0F2FE;
+  --color-primary: #ffffff;
+  --color-accent: #0284c7;
+  --color-sunrise: #10b981;
+  --color-dark: #f8fafc;
+  --color-emerald-deep: #e0f2fe;
 }
 
 @layer base {
   body {
     @apply text-slate-800 font-sans antialiased min-h-screen relative overflow-x-hidden;
-    background-color: #FAFAFA;
-    background-image: linear-gradient(to right, rgba(2, 132, 199, 0.03) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(2, 132, 199, 0.03) 1px, transparent 1px);
+    background-color: #fafafa;
+    background-image:
+      linear-gradient(to right, rgba(2, 132, 199, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(2, 132, 199, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 }
 
 @layer utilities {
-  .animate-float-dna { animation: float-dna infinite linear; will-change: transform; }
-  .animate-float-hex { animation: float-hex infinite ease-in-out; will-change: transform; }
-  .animate-float-flask { animation: float-flask infinite ease-in-out; will-change: transform; }
-  .animate-flash-scan { animation: flash-scan infinite linear; will-change: transform; }
-  .animate-glow-pulse { animation: glow-pulse infinite ease-in-out; will-change: transform, opacity; }
-  .animate-slide-fast { animation: slide-fast infinite linear; will-change: transform; }
-  .animate-orbit { animation: orbit infinite linear; will-change: transform; }
-  .animate-data-flow { animation: data-flow infinite linear; will-change: transform, opacity; }
-  .animate-breathe { animation: breathe infinite ease-in-out; will-change: transform, opacity; }
-  .animate-pulse-glow { animation: pulse-glow infinite ease-in-out; will-change: transform, opacity; }
-  .animate-float-simple { animation: float-simple infinite ease-in-out; will-change: transform; }
+  .animate-float-dna {
+    animation: float-dna infinite linear;
+    will-change: transform;
+  }
+  .animate-float-hex {
+    animation: float-hex infinite ease-in-out;
+    will-change: transform;
+  }
+  .animate-float-flask {
+    animation: float-flask infinite ease-in-out;
+    will-change: transform;
+  }
+  .animate-flash-scan {
+    animation: flash-scan infinite linear;
+    will-change: transform;
+  }
+  .animate-glow-pulse {
+    animation: glow-pulse infinite ease-in-out;
+    will-change: transform, opacity;
+  }
+  .animate-slide-fast {
+    animation: slide-fast infinite linear;
+    will-change: transform;
+  }
+  .animate-orbit {
+    animation: orbit infinite linear;
+    will-change: transform;
+  }
+  .animate-data-flow {
+    animation: data-flow infinite linear;
+    will-change: transform, opacity;
+  }
+  .animate-breathe {
+    animation: breathe infinite ease-in-out;
+    will-change: transform, opacity;
+  }
+  .animate-pulse-glow {
+    animation: pulse-glow infinite ease-in-out;
+    will-change: transform, opacity;
+  }
+  .animate-float-simple {
+    animation: float-simple infinite ease-in-out;
+    will-change: transform;
+  }
 }
 
 @keyframes float-simple {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 @keyframes breathe {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
 }
 @keyframes float-dna {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
-  50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
-  100% { transform: translateY(0) rotate(360deg); opacity: 0.4; }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-100px) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 0.4;
+  }
 }
 @keyframes float-hex {
-  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
-  50% { transform: translate(40px, 80px) rotate(90deg); opacity: 1; }
-  100% { transform: translate(0, 0) rotate(180deg); opacity: 0.5; }
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(40px, 80px) rotate(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(180deg);
+    opacity: 0.5;
+  }
 }
 @keyframes float-flask {
-  0%, 100% { transform: translateY(0) rotate(-15deg); opacity: 0.4; }
-  50% { transform: translateY(150px) rotate(15deg); opacity: 0.9; }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-15deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(150px) rotate(15deg);
+    opacity: 0.9;
+  }
 }
 @keyframes flash-scan {
-  0%, 100% { transform: translateY(-100px); }
-  50% { transform: translateY(400px); }
+  0%,
+  100% {
+    transform: translateY(-100px);
+  }
+  50% {
+    transform: translateY(400px);
+  }
 }
 @keyframes glow-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.3; }
-  50% { transform: scale(1.4); opacity: 0.6; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
 }
 @keyframes slide-fast {
-  0% { transform: translateX(-32px); }
-  100% { transform: translateX(32px); }
+  0% {
+    transform: translateX(-32px);
+  }
+  100% {
+    transform: translateX(32px);
+  }
 }
 @keyframes orbit {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @keyframes data-flow {
-  0% { transform: translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateX(200px); opacity: 0; }
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200px);
+    opacity: 0;
+  }
 }
 @keyframes pulse-glow {
-  0%, 100% { transform: scale(1); opacity: 0.3; }
-  50% { transform: scale(1.5); opacity: 1; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
 }
 
 .glow-text-sunrise {
@@ -94,7 +203,11 @@
 }
 
 .sunrise-glow-radial {
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.15) 0%,
+    transparent 70%
+  );
 }
 
 .glass-panel {
@@ -110,10 +223,10 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0EA5E9;
+  background: #0ea5e9;
   border-radius: 10px;
 }
