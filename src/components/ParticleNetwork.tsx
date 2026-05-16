@@ -74,11 +74,11 @@ export const ParticleNetwork: React.FC = () => {
         this.x = Math.random() * canvas!.width;
         this.y = canvas!.height + 50;
         this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = -Math.random() * 1.2 - 0.5;
+        this.vy = -Math.random() * 1.5 - 0.8;
         this.char = bases[Math.floor(Math.random() * bases.length)];
-        this.targetAlpha = Math.random() * 0.25 + 0.05;
+        this.targetAlpha = Math.random() * 0.4 + 0.15;
         this.alpha = 0;
-        this.size = Math.random() * 14 + 10;
+        this.size = Math.random() * 32 + 16;
         this.isSunrise = Math.random() > 0.6;
       }
 
@@ -103,7 +103,7 @@ export const ParticleNetwork: React.FC = () => {
       draw() {
         if (!ctx) return;
         ctx.font = `bold ${this.size}px monospace`;
-        ctx.fillStyle = this.isSunrise ? `rgba(16, 185, 129, ${this.alpha})` : `rgba(2, 132, 199, ${this.alpha})`;
+        ctx.fillStyle = this.isSunrise ? `rgba(16, 185, 129, ${this.alpha * 0.6})` : `rgba(2, 132, 199, ${this.alpha * 0.6})`;
         ctx.fillText(this.char, this.x, this.y);
       }
     }

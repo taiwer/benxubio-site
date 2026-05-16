@@ -87,8 +87,23 @@ const MobileNavLink = ({ children, active, onClick }: { children: React.ReactNod
 );
 
 const Footer = () => (
-  <footer className="relative bg-primary/90 border-t border-slate-200 pt-20 pb-10">
-    <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+  <footer className="relative bg-slate-50 border-t border-slate-200 pt-20 pb-10 overflow-hidden">
+    {/* Background Decorations for Footer */}
+    <div className="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden">
+      <div className="absolute -top-[50%] -right-[10%] w-[500px] h-[500px] bg-gradient-to-bl from-sunrise/10 to-transparent blur-3xl rounded-full"></div>
+      <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] bg-gradient-to-tr from-accent/10 to-transparent blur-3xl rounded-full"></div>
+    </div>
+    
+    {/* SVG Biotech Watermark */}
+    <div className="absolute bottom-10 right-10 opacity-5 pointer-events-none">
+      <svg width="300" height="300" viewBox="0 0 100 100" className="animate-[spin_40s_linear_infinite]">
+         <path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z" fill="none" stroke="currentColor" strokeWidth="2" />
+         <path d="M50 10 L50 50 M10 30 L50 50 M90 30 L50 50" stroke="currentColor" strokeWidth="1" strokeDasharray="2,2"/>
+         <circle cx="50" cy="50" r="2" fill="currentColor" />
+      </svg>
+    </div>
+
+    <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
         <div className="col-span-1 md:col-span-2">
           <div className="flex items-center gap-3 mb-8">
@@ -97,16 +112,16 @@ const Footer = () => (
             </div>
             <span className="text-2xl font-bold tracking-tight">本旭生物</span>
           </div>
-          <p className="text-emerald-100/60 max-w-sm mb-10 leading-relaxed">
+          <p className="text-slate-800 text-lg max-w-md mb-10 leading-relaxed font-medium">
             引领生命科学研究新范式。通过卓越的生信分析技术与专业实验室研发服务，协助科研工作者解锁生命之奥秘。
           </p>
-          <div className="flex space-x-10 text-xs text-emerald-500/80 mb-6">
+          <div className="flex space-x-10 text-sm font-medium text-slate-700 mb-6 font-mono p-4 bg-slate-100/50 rounded-2xl border border-slate-200 inline-flex">
             <div className="flex items-center">
-              <span className="w-2 h-2 bg-accent rounded-full mr-2 animate-pulse"></span>
+              <span className="w-2.5 h-2.5 bg-accent rounded-full mr-3 shadow-[0_0_8px_rgba(2,132,199,0.6)] animate-pulse"></span>
               实验资质认证已核验
             </div>
             <div className="flex items-center">
-              <span className="w-2 h-2 bg-sunrise rounded-full mr-2"></span>
+              <span className="w-2.5 h-2.5 bg-sunrise rounded-full mr-3 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
               24H 生信算力集群在线
             </div>
           </div>
@@ -148,6 +163,29 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center overflow-hidden">
         <ParticleNetwork />
+        
+        {/* Decorative Side Elements - Colorful Ribbons */}
+        <div className="absolute top-0 left-0 w-64 h-full pointer-events-none opacity-30">
+          <div className="absolute top-[-10%] left-[-20%] w-[300px] h-[70vh] bg-gradient-to-b from-accent/40 to-transparent blur-3xl transform -rotate-12 rounded-full"></div>
+          <div className="absolute top-[30%] left-[-10%] w-[200px] h-[50vh] bg-gradient-to-t from-sunrise/40 to-transparent blur-3xl transform rotate-12 rounded-full"></div>
+        </div>
+        <div className="absolute top-0 right-0 w-64 h-full pointer-events-none opacity-30">
+          <div className="absolute top-[10%] right-[-10%] w-[400px] h-[60vh] bg-gradient-to-b from-sunrise/30 to-transparent blur-3xl transform rotate-45 rounded-full"></div>
+          <div className="absolute bottom-[-10%] right-[-20%] w-[300px] h-[80vh] bg-gradient-to-t from-accent/30 to-transparent blur-3xl transform -rotate-45 rounded-full"></div>
+        </div>
+
+        {/* Abstract Biotech DNA/Strand Shapes */}
+        <svg className="absolute right-[5%] top-[20%] w-64 h-64 text-accent/10 animate-[spin_60s_linear_infinite] pointer-events-none" viewBox="0 0 100 100">
+          <path d="M10,50 Q25,20 50,50 T90,50" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="5,5" />
+          <path d="M10,50 Q25,80 50,50 T90,50" fill="none" stroke="currentColor" strokeWidth="2" />
+          <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="0.5" />
+        </svg>
+
+        <svg className="absolute left-[5%] bottom-[15%] w-48 h-48 text-sunrise/10 animate-[spin_40s_linear_infinite_reverse] pointer-events-none" viewBox="0 0 100 100">
+           <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="10,5" />
+           <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1.5" />
+           <circle cx="50" cy="50" r="15" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="2,4" />
+        </svg>
         
         {/* Sunrise Halo Decoration */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] sunrise-glow-radial opacity-40 pointer-events-none" />
