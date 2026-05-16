@@ -21,7 +21,7 @@ async function startServer() {
         return res.status(500).json({ error: "Webhook URL not configured" });
       }
 
-      const { name, organization, phone, email, categories, description } =
+      const { name, organization, phone, email, wechat, categories, description } =
         req.body;
 
       const markdownContent = `**项目需求对接申请**
@@ -29,6 +29,7 @@ async function startServer() {
 > **单位**: ${organization}
 > **电话**: ${phone}
 > **邮箱**: ${email}
+> **微信号**: ${wechat || "未提供"}
 > **需求分类**: ${categories.join(", ")}
 > **需求简述**:
 ${description}`;

@@ -2,7 +2,7 @@
   "contact": {
     "phone": "17717473904",
     "email": "contact@benxubio.com",
-    "address": "上海市嘉定区沪宜公路1185号1幢1层（集中登记地）"
+    "address": "上海市嘉定区沪宜公路1185号1幢1层"
   },
   "webhookUrl": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=6b209563-ef25-4154-ac3d-9c6721028185",
   "wechatName": "本旭生物专属客服"

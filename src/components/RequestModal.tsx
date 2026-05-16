@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Send, User, Building, Mail, Phone, FileText } from "lucide-react";
+import { X, Send, User, Building, Mail, Phone, FileText, MessageCircle } from "lucide-react";
 import config from "../config.json";
 
 export const RequestModal = ({
@@ -18,6 +18,7 @@ export const RequestModal = ({
     organization: "",
     phone: "",
     email: "",
+    wechat: "",
     categories: [] as string[],
     description: "",
   });
@@ -69,6 +70,7 @@ export const RequestModal = ({
           organization: "",
           phone: "",
           email: "",
+          wechat: "",
           categories: [],
           description: "",
         });
@@ -136,11 +138,6 @@ export const RequestModal = ({
                       src="/weixin.png"
                       alt="WeChat QR Code Placeholder"
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Fallback if image not found
-                        (e.target as HTMLImageElement).src =
-                          'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23f1f5f9"/><text x="100" y="100" font-family="sans-serif" font-size="14" fill="%2394a3b8" text-anchor="middle" dominant-baseline="middle">weixin.png (二维码占位)</text></svg>';
-                      }}
                     />
                   </div>
                 </div>
@@ -260,6 +257,32 @@ export const RequestModal = ({
                           />
                         </div>
                       </div>
+                      
+                      {/* WeChat */}
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">
+                          微信号 
+                        </label>
+                        <div className="relative">
+                          <MessageCircle
+                            size={18}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                          />
+                          <input
+                            type="text"
+                            placeholder="您的微信号（选填）"
+                            value={formData.wechat}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                wechat: e.target.value,
+                              })
+                            }
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-sunrise/50 focus:border-sunrise/50 transition-all text-slate-900"
+                          />
+                        </div>
+                      </div>
+
                     </div>
 
                     {/* Category */}
