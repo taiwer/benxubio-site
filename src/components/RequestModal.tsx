@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Send, User, Building, Mail, Phone, FileText } from "lucide-react";
+import config from "../config.json";
 
 export const RequestModal = ({
   isOpen,
@@ -127,6 +128,9 @@ export const RequestModal = ({
                   <p className="text-slate-500 text-sm mb-4">
                     您也可以扫码添加专属客服微信快速沟通：
                   </p>
+                  <div className="font-medium text-slate-800 mb-2">
+                    {config.wechatName}
+                  </div>
                   <div className="w-48 h-48 bg-slate-100 border border-slate-200 rounded-xl overflow-hidden flex items-center justify-center mb-4 relative group">
                     <img
                       src="/weixin.png"
