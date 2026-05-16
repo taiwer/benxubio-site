@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Database, Microscope, Globe, Activity, FlaskConical, Dna } from "lucide-react";
+import {
+  Database,
+  Microscope,
+  Globe,
+  Activity,
+  FlaskConical,
+  Dna,
+} from "lucide-react";
 
 export const DataMonitor = () => {
   const [logs, setLogs] = useState<string[]>([]);

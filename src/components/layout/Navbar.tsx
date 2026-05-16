@@ -46,9 +46,11 @@ export const MobileNavLink = ({
 export const Navbar = ({
   currentPage,
   setPage,
+  onRequestStart,
 }: {
   currentPage: Page;
   setPage: (p: Page) => void;
+  onRequestStart?: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -94,7 +96,10 @@ export const Navbar = ({
             >
               关于我们
             </NavLink>
-            <button className="px-6 py-2 bg-transparent border border-sunrise text-sunrise text-sm rounded-full hover:bg-sunrise hover:text-black transition-all duration-300 font-bold glow-border-sunrise">
+            <button
+              onClick={onRequestStart}
+              className="px-6 py-2 bg-transparent border border-sunrise text-sunrise text-sm rounded-full hover:bg-sunrise hover:text-black transition-all duration-300 font-bold glow-border-sunrise"
+            >
               提交项目需求
             </button>
           </div>
@@ -145,8 +150,14 @@ export const Navbar = ({
             >
               关于我们
             </MobileNavLink>
-            <button className="w-full bg-accent text-primary px-5 py-4 rounded-xl font-bold">
-              联系我们
+            <button
+              onClick={() => {
+                onRequestStart?.();
+                setIsOpen(false);
+              }}
+              className="w-full bg-accent text-primary px-5 py-4 rounded-xl font-bold"
+            >
+              提交项目需求
             </button>
           </motion.div>
         )}

@@ -114,7 +114,13 @@ export const WorkflowStep = ({
   </div>
 );
 
-export const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
+export const HomePage = ({
+  setPage,
+  onRequestStart,
+}: {
+  setPage: (p: Page) => void;
+  onRequestStart?: () => void;
+}) => {
   return (
     <div>
       {/* Hero Section */}
@@ -213,7 +219,7 @@ export const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
             </p>
             <div className="flex flex-wrap gap-4">
               <button
-                onClick={() => setPage("services")}
+                onClick={onRequestStart}
                 className="bg-sunrise text-primary hover:bg-slate-50 hover:text-sunrise px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg shadow-sunrise/20"
               >
                 立即开启科研项目

@@ -1,5 +1,6 @@
 import React from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
+import config from "../../config.json";
 
 export const Footer = () => (
   <footer className="relative bg-slate-50 border-t border-slate-200 pt-20 pb-10 overflow-hidden">
@@ -91,14 +92,14 @@ export const Footer = () => (
           </h4>
           <ul className="space-y-4 text-slate-600 text-sm">
             <li className="flex items-center gap-3">
-              <Phone size={16} className="text-accent" /> 021-XXXX-XXXX
+              <Phone size={16} className="text-accent" /> {config.contact.phone}
             </li>
             <li className="flex items-center gap-3">
-              <Mail size={16} className="text-accent" /> contact@benxubio.com
+              <Mail size={16} className="text-accent" /> {config.contact.email}
             </li>
             <li className="flex items-start gap-3">
               <MapPin size={16} className="text-accent mt-1" />{" "}
-              上海市浦东新区张江高科技园区
+              {config.contact.address}
             </li>
           </ul>
         </div>

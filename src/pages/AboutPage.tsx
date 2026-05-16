@@ -28,7 +28,11 @@ export const BadgeCard = ({
   </div>
 );
 
-export const AboutPage = () => {
+export const AboutPage = ({
+  onRequestStart,
+}: {
+  onRequestStart?: () => void;
+}) => {
   return (
     <div className="pt-20 bg-gradient-to-b from-primary to-dark relative overflow-hidden">
       {/* Animated cell background */}
@@ -187,7 +191,10 @@ export const AboutPage = () => {
           <p className="mb-12">
             无论您在生信分析上有任何疑难杂症，还是需要高水准的湿实验支持，本旭生物专家团队期待为您提供专业、可靠、快速的响应方案。
           </p>
-          <button className="bg-accent text-primary px-10 py-5 rounded-full font-bold text-xl shadow-lg shadow-accent/20 transition-transform hover:scale-105">
+          <button
+            onClick={onRequestStart}
+            className="bg-accent text-primary px-10 py-5 rounded-full font-bold text-xl shadow-lg shadow-accent/20 transition-transform hover:scale-105"
+          >
             联系技术专家
           </button>
         </motion.div>
