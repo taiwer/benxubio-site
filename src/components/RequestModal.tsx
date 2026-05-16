@@ -12,18 +12,63 @@ export const RequestModal = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    organization: "",
+    phone: "",
+    email: "",
+    categories: [] as string[],
+    description: "",
+  });
+
+  const handleCategoryChange = (cat: string) => {
+    setFormData((prev) => {
+      const isSelected = prev.categories.includes(cat);
+      if (isSelected) {
+        return {
+          ...prev,
+          categories: prev.categories.filter((c) => c !== cat),
+        };
+      } else {
+        return { ...prev, categories: [...prev.categories, cat] };
+      }
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      const response = await fetch("/api/submit-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Submit failed");
+      }
+
       setIsSuccess(true);
       setTimeout(() => {
         setIsSuccess(false);
+        setFormData({
+          name: "",
+          organization: "",
+          phone: "",
+          email: "",
+          categories: [],
+          description: "",
+        });
         onClose();
       }, 2000);
-    }, 1500);
+    } catch (error) {
+      console.error(error);
+      alert("提交失败，请重试。");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -105,6 +150,10 @@ export const RequestModal = ({
                             required
                             type="text"
                             placeholder="如: 陈博士"
+                            value={formData.name}
+                            onChange={(e) =>
+                              setFormData({ ...formData, name: e.target.value })
+                            }
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-sunrise/50 focus:border-sunrise/50 transition-all text-slate-900"
                           />
                         </div>
@@ -124,6 +173,13 @@ export const RequestModal = ({
                             required
                             type="text"
                             placeholder="如: 某高校生命科学学院"
+                            value={formData.organization}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                organization: e.target.value,
+                              })
+                            }
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-sunrise/50 focus:border-sunrise/50 transition-all text-slate-900"
                           />
                         </div>
@@ -143,6 +199,13 @@ export const RequestModal = ({
                             required
                             type="tel"
                             placeholder="您的手机号或座机"
+                            value={formData.phone}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                phone: e.target.value,
+                              })
+                            }
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-sunrise/50 focus:border-sunrise/50 transition-all text-slate-900"
                           />
                         </div>
@@ -162,6 +225,13 @@ export const RequestModal = ({
                             required
                             type="email"
                             placeholder="your@email.com"
+                            value={formData.email}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                email: e.target.value,
+                              })
+                            }
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-sunrise/50 focus:border-sunrise/50 transition-all text-slate-900"
                           />
                         </div>
@@ -191,6 +261,8 @@ export const RequestModal = ({
                             <input
                               type="checkbox"
                               className="min-w-4 w-4 h-4 text-sunrise border-slate-300 rounded focus:ring-sunrise"
+                              checked={formData.categories.includes(cat)}
+                              onChange={() => handleCategoryChange(cat)}
                             />
                             <span className="text-sm text-slate-700 whitespace-nowrap">
                               {cat}
@@ -214,6 +286,13 @@ export const RequestModal = ({
                           required
                           rows={4}
                           placeholder="请简要描述您的项目背景、数据规模、预期目标或碰到的分析瓶颈..."
+                          value={formData.description}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              description: e.target.value,
+                            })
+                          }
                           className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-sunrise/50 focus:border-sunrise/50 transition-all text-slate-900 resize-none"
                         />
                       </div>
