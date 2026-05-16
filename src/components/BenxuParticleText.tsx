@@ -41,7 +41,7 @@ export const BenxuParticleText: React.FC = () => {
         this.targetY = y;
         this.size = Math.random() * 2 + 0.5;
         this.density = Math.random() * 15 + 5;
-        this.color = Math.random() > 0.7 ? '#DFFF00' : '#39FF14';
+        this.color = Math.random() > 0.7 ? '#0284c7' : '#10b981';
         this.alpha = Math.random() * 0.6 + 0.4;
         this.friction = Math.random() * 0.1 + 0.75; // 0.75 - 0.85
         this.spring = Math.random() * 0.05 + 0.05; // 0.05 - 0.10
@@ -221,7 +221,7 @@ export const BenxuParticleText: React.FC = () => {
 
   return (
     <div className="w-full relative group">
-       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.05) 0%, transparent 60%)' }}></div>
+       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 60%)' }}></div>
        <canvas ref={canvasRef} className="w-full h-[120px] md:h-[200px] cursor-crosshair z-10 relative" />
     </div>
   );

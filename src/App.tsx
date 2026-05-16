@@ -230,8 +230,7 @@ const HomePage = ({ setPage }: { setPage: (p: Page) => void }) => {
         </div>
       </section>
 
-      <div className="relative bg-gradient-to-b from-dark via-primary/30 to-dark">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.12]"></div>
+      <div className="relative bg-dark">
         
         {/* Glow continuation from Hero */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[300px] bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.15)_0%,transparent_70%)] pointer-events-none" />
@@ -505,10 +504,9 @@ const DataMonitor = () => {
 
 const ServicesPage = () => {
   return (
-    <div className="pt-20 bg-gradient-to-b from-primary to-dark relative overflow-hidden">
+    <div className="pt-20 bg-dark relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
         
         {/* Floating Cellular/Tech Nodes */}
         {[...Array(20)].map((_, i) => (
