@@ -51,7 +51,17 @@ export const RequestModal = ({
       }
 
       setIsSuccess(true);
-      setTimeout(() => {
+    } catch (error) {
+      console.error(error);
+      alert("提交失败，请重试。");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  React.useEffect(() => {
+    if (!isOpen) {
+      const timer = setTimeout(() => {
         setIsSuccess(false);
         setFormData({
           name: "",
@@ -61,15 +71,10 @@ export const RequestModal = ({
           categories: [],
           description: "",
         });
-        onClose();
-      }, 2000);
-    } catch (error) {
-      console.error(error);
-      alert("提交失败，请重试。");
-    } finally {
-      setIsSubmitting(false);
+      }, 500);
+      return () => clearTimeout(timer);
     }
-  };
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
@@ -109,16 +114,31 @@ export const RequestModal = ({
               </button>
 
               {isSuccess ? (
-                <div className="flex flex-col items-center justify-center py-20">
+                <div className="flex flex-col items-center justify-center py-10">
                   <div className="w-20 h-20 bg-sunrise/20 rounded-full flex items-center justify-center mb-6">
                     <Send size={40} className="text-sunrise" />
                   </div>
-                  <h3 className="text-3xl font-bold text-slate-900 mb-4">
+                  <h3 className="text-3xl font-bold text-slate-900 mb-2">
                     提交成功！
                   </h3>
-                  <p className="text-slate-600 text-lg">
+                  <p className="text-slate-600 text-lg mb-6">
                     我们的科研顾问将在24小时内与您联系。
                   </p>
+                  <p className="text-slate-500 text-sm mb-4">
+                    您也可以扫码添加专属客服微信快速沟通：
+                  </p>
+                  <div className="w-48 h-48 bg-slate-100 border border-slate-200 rounded-xl overflow-hidden flex items-center justify-center mb-4 relative group">
+                    <img
+                      src="/weixin.png"
+                      alt="WeChat QR Code Placeholder"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback if image not found
+                        (e.target as HTMLImageElement).src =
+                          'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23f1f5f9"/><text x="100" y="100" font-family="sans-serif" font-size="14" fill="%2394a3b8" text-anchor="middle" dominant-baseline="middle">weixin.png (二维码占位)</text></svg>';
+                      }}
+                    />
+                  </div>
                 </div>
               ) : (
                 <>
