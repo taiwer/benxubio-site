@@ -6,6 +6,7 @@ import { HomePage } from "./pages/HomePage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { AboutPage } from "./pages/AboutPage";
 import { RequestModal } from "./components/RequestModal";
+import { FloatingContact } from "./components/FloatingContact";
 import { Page } from "./types";
 
 export default function App() {
@@ -71,6 +72,8 @@ export default function App() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+
+      <FloatingContact />
     </div>
   );
 }
