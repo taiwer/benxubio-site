@@ -244,10 +244,8 @@
 /* Hide original Aliyun Appflow Bot Icon but keep it clickable via JS */
 #appflow-chat-container > div:not([class*="ChatSDKStyle"]):first-child {
   opacity: 0 !important;
-  pointer-events: all !important;
-  position: fixed !important;
-  left: -9999px !important;
-  top: -9999px !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
 }
 
 /* Force chat SVGs and images to match theme (hue shift from orange to green/blue) */

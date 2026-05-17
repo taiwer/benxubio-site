@@ -23,23 +23,23 @@ export const FloatingContact = () => {
       const launcher = container.firstElementChild as HTMLElement;
       
       if (launcher) {
-        // Find if the popup is already open. If so, do not blindly click everything.
-        const isPopupOpen = container.querySelector('.ChatSDKStyle') || container.querySelector('[class*="chat"]');
-        
-        if (typeof (launcher as any).click === 'function') {
-           (launcher as any).click();
-        } else {
-           launcher.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-        }
-        
-        // As a fallback, trigger click on the SVG or IMG inside the launcher
-        const icon = launcher.querySelector('img, svg');
-        if (icon) {
-          if (typeof (icon as any).click === 'function') {
-            (icon as any).click();
-          } else {
-            icon.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-          }
+        // Broadly dispatch events to ensure React synthetic event system catches it
+        const targetElement = launcher.querySelector('button, [role="button"], img, svg') || launcher;
+
+        const events = ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'];
+        events.forEach(eventType => {
+          targetElement.dispatchEvent(new MouseEvent(eventType, {
+            bubbles: true,
+            cancelable: true,
+            view: window,
+            clientX: 100, // mock coordinates
+            clientY: 100
+          }));
+        });
+
+        // Also call element.click() just in case it has a native handler
+        if (typeof (targetElement as any).click === 'function') {
+           (targetElement as any).click();
         }
       }
     } else {
