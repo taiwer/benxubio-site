@@ -91,32 +91,37 @@ export const RequestModal = ({
             className="fixed inset-0 bg-dark/80 backdrop-blur-sm z-[100]"
           />
           <div
-            className="fixed inset-0 flex items-center justify-center p-4 z-[101] cursor-pointer"
+            className="fixed inset-0 flex flex-col md:items-center justify-end md:justify-center p-0 md:p-4 z-[101] cursor-pointer"
             onClick={onClose}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 100 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              exit={{ opacity: 0, scale: 0.95, y: 100 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-primary/95 border border-sunrise/30 rounded-3xl p-8 w-full max-w-2xl shadow-2xl relative overflow-hidden cursor-default"
+              className="bg-primary border-t border-l border-r md:border border-sunrise/30 rounded-t-3xl md:rounded-3xl w-full max-w-2xl shadow-2xl relative flex flex-col max-h-[90vh] md:max-h-[85vh] cursor-default"
             >
               {/* Background Glow */}
               <div className="absolute -top-40 -right-40 w-80 h-80 bg-sunrise/10 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
 
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onClose();
-                }}
-                className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors z-[102] cursor-pointer"
-              >
-                <X size={24} />
-              </button>
+              {/* Close Button */}
+              <div className="flex justify-end p-4 md:p-6 pb-0 relative z-[102] shrink-0">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClose();
+                  }}
+                  className="text-slate-400 hover:text-slate-900 transition-colors cursor-pointer bg-primary/50 rounded-full p-1"
+                >
+                  <X size={24} />
+                </button>
+              </div>
 
-              {isSuccess ? (
+              {/* Scrollable Content */}
+              <div className="p-6 md:p-8 pt-0 overflow-y-auto flex-1 overscroll-contain">
+                {isSuccess ? (
                 <div className="flex flex-col items-center justify-center py-10">
                   <div className="w-20 h-20 bg-sunrise/20 rounded-full flex items-center justify-center mb-6">
                     <Send size={40} className="text-sunrise" />
@@ -362,6 +367,7 @@ export const RequestModal = ({
                   </form>
                 </>
               )}
+              </div>
             </motion.div>
           </div>
         </>
