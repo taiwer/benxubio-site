@@ -18,20 +18,29 @@ export const FloatingContact = () => {
     // Attempt to click Aliyun's Chat button wrapper or nested element
     const container = document.querySelector("#appflow-chat-container");
     if (container) {
-      // Try to find the button inside
-      const aliyunBtn = (container.querySelector('div[style*="cursor: grab"]') || 
-                        container.querySelector('div.sc-iveFHj') ||
-                        container.querySelector('div')) as HTMLElement;
+      // The Aliyun Chat SDK typically injects the launcher as the first child.
+      // The chat popup itself will usually have a class like ChatSDKStyle or be appended later.
+      const launcher = container.firstElementChild as HTMLElement;
       
-      if (aliyunBtn) {
-        // Dispatch event for more reliable triggering
-        aliyunBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-        // Also call .click() as fallback
-        if (typeof aliyunBtn.click === 'function') aliyunBtn.click();
+      if (launcher) {
+        // Find if the popup is already open. If so, do not blindly click everything.
+        const isPopupOpen = container.querySelector('.ChatSDKStyle') || container.querySelector('[class*="chat"]');
         
-        // Try clicking children in case listeners are deeper
-        const img = aliyunBtn.querySelector('img');
-        if (img instanceof HTMLElement) img.click();
+        if (typeof (launcher as any).click === 'function') {
+           (launcher as any).click();
+        } else {
+           launcher.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+        }
+        
+        // As a fallback, trigger click on the SVG or IMG inside the launcher
+        const icon = launcher.querySelector('img, svg');
+        if (icon) {
+          if (typeof (icon as any).click === 'function') {
+            (icon as any).click();
+          } else {
+            icon.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+          }
+        }
       }
     } else {
       // Fallback selector for Aliyun chat box container
