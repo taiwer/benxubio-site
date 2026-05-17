@@ -8,29 +8,42 @@ export const FloatingContact = () => {
   const [showAI, setShowAI] = useState(false);
 
   const handleAIClick = () => {
-    // Attempt to click Aliyun's Chat button wrapper or nested element
+    // Attempt standard API if available
+    try {
+      if ((window as any).APPFLOW_CHAT_SDK && typeof (window as any).APPFLOW_CHAT_SDK.open === "function") {
+        (window as any).APPFLOW_CHAT_SDK.open();
+        return;
+      }
+    } catch (e) {}
+
+    // First try the configured container ID
     const container = document.querySelector("#appflow-chat-container");
     if (container) {
-      // Try to find the button inside
-      const aliyunBtn = (container.querySelector('div[style*="cursor: grab"]') || 
-                        container.querySelector('div.sc-iveFHj') ||
-                        container.querySelector('div')) as HTMLElement;
+      // The CSS hides the first child, so it's likely the chat trigger button
+      const firstChild = container.firstElementChild as HTMLElement;
+      if (firstChild) {
+        firstChild.click();
+        firstChild.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window }));
+      }
       
-      if (aliyunBtn) {
-        // Dispatch event for more reliable triggering
-        aliyunBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-        // Also call .click() as fallback
-        if (typeof aliyunBtn.click === 'function') aliyunBtn.click();
-        
-        // Try clicking children in case listeners are deeper
-        const img = aliyunBtn.querySelector('img');
-        if (img instanceof HTMLElement) img.click();
+      // Also attempt to click icons inside
+      const icon = container.querySelector("img, svg");
+      if (icon) {
+        (icon as HTMLElement).click();
+        icon.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window }));
+      }
+      
+      // Broad selector for the specific grab/drag element they used before
+      const grabBtn = container.querySelector('div[style*="cursor: grab"]') || container.querySelector('div[class*="icon"]');
+      if (grabBtn) {
+        (grabBtn as HTMLElement).click();
       }
     } else {
-      // Fallback selector for Aliyun chat box container
+      // Fallback selector for generic class
       const alternateBtn = document.querySelector(".appflow-chatbot-box");
       if (alternateBtn instanceof HTMLElement) {
         alternateBtn.click();
+        alternateBtn.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window }));
       }
     }
   };
