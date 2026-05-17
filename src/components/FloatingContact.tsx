@@ -7,7 +7,7 @@ export const FloatingContact = () => {
   const [showWechat, setShowWechat] = useState(false);
 
   return (
-    <div className="fixed right-6 bottom-32 z-[2147483647] flex flex-col gap-4">
+    <div className="fixed right-6 bottom-32 z-50 flex flex-col gap-4">
       {/* Phone */}
       <div className="relative flex items-center group">
         {showPhone && (
@@ -17,7 +17,7 @@ export const FloatingContact = () => {
           </div>
         )}
         <button
-          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-accent pointer-events-auto"
+          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-accent"
           onMouseEnter={() => setShowPhone(true)}
           onMouseLeave={() => setShowPhone(false)}
         >
@@ -43,7 +43,7 @@ export const FloatingContact = () => {
           </div>
         )}
         <button
-          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-[#07C160] pointer-events-auto"
+          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-[#07C160]"
           onMouseEnter={() => setShowWechat(true)}
           onMouseLeave={() => setShowWechat(false)}
         >

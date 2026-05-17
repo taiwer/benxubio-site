@@ -99,7 +99,7 @@ export const RequestModal = ({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-primary/95 border border-sunrise/30 rounded-3xl p-5 md:p-8 w-full max-w-2xl shadow-2xl relative overflow-x-hidden overflow-y-auto max-h-[90vh] cursor-default"
+              className="bg-primary/95 border border-sunrise/30 rounded-3xl p-8 w-full max-w-2xl shadow-2xl relative overflow-hidden cursor-default"
             >
               {/* Background Glow */}
               <div className="absolute -top-40 -right-40 w-80 h-80 bg-sunrise/10 rounded-full blur-3xl pointer-events-none" />
@@ -111,7 +111,7 @@ export const RequestModal = ({
                   e.stopPropagation();
                   onClose();
                 }}
-                className="absolute top-4 right-4 md:top-6 md:right-6 text-slate-400 hover:text-slate-900 transition-colors z-[102] cursor-pointer"
+                className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors z-[102] cursor-pointer"
               >
                 <X size={24} />
               </button>
@@ -143,11 +143,11 @@ export const RequestModal = ({
                 </div>
               ) : (
                 <>
-                  <div className="mb-6 md:mb-8 relative z-10 pr-6">
-                    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+                  <div className="mb-8 relative z-10">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
                       项目需求对接
                     </h2>
-                    <p className="text-sm md:text-base text-slate-600">
+                    <p className="text-slate-600">
                       填写您的科研需求，我们的数据科学家和实验专家将快速响应。
                     </p>
                   </div>
