@@ -231,6 +231,16 @@
   border-radius: 10px;
 }
 
+/* Override Aliyun Chat SDK Theme Colors to match the green "sunrise" theme */
+:root {
+  --chat-brand-1: #10b981 !important;
+  --chat-brand-2: #059669 !important;
+  --chat-brand-3: #d1fae5 !important;
+  --chat-btn-primary-bg: linear-gradient(120deg, #34d399 0%, #10b981 100%) !important;
+  --chat-orange: #10b981 !important;
+  --chat-blue: #0284c7 !important;
+}
+
 /* Hide original Aliyun Appflow Bot Icon but keep it clickable via JS */
 #appflow-chat-container > div:first-child {
   position: fixed !important;
@@ -238,4 +248,13 @@
   top: -9999px !important;
   pointer-events: all !important;
   opacity: 0 !important;
+}
+
+/* Force chat SVGs and images to match theme (hue shift from orange to green/blue) */
+#appflow-chat-container .appflow-chatbot-box svg {
+  color: var(--chat-brand-1) !important;
+}
+#appflow-chat-container svg path[fill^="#ff"], 
+#appflow-chat-container svg path[fill^="#FF"] {
+  fill: #10b981 !important;
 }
