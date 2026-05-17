@@ -230,3 +230,12 @@
   background: #0ea5e9;
   border-radius: 10px;
 }
+
+/* Align AppFlow Chat Icon with FloatingContact */
+#appflow-chat-container > div[aria-describedby] {
+  right: 24px !important;
+  bottom: 58px !important; /* 修改这里的值(比如48px, 64px)可以调整图标垂直位置 */
+}
+#appflow-chat-container .appflow-chatbot-box {
+  right: 24px !important;
+}
