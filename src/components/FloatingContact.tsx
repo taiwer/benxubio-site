@@ -6,72 +6,11 @@ export const FloatingContact = () => {
   const [showPhone, setShowPhone] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [showWechat, setShowWechat] = useState(false);
-  const [showAI, setShowAI] = useState(false);
 
   const handlePhoneClick = () => {
     navigator.clipboard.writeText(config.contact.phone);
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2000);
-  };
-
-  const handleAIClick = () => {
-    // Attempt to click Aliyun's Chat button wrapper or nested element
-    const container = document.querySelector("#appflow-chat-container");
-    if (container) {
-      // The Aliyun Chat SDK typically injects the launcher as the first child.
-      const launcher = container.firstElementChild as HTMLElement;
-      
-      if (launcher) {
-        // Collect all possible clickable targets including the launcher itself
-        const targets = [launcher, ...Array.from(launcher.querySelectorAll('img, svg, button, div, [role="button"]'))];
-        
-        let success = false;
-
-        targets.forEach(target => {
-          if (target instanceof HTMLElement || target instanceof SVGElement) {
-            // Method 1: React Fiber internal click bypass (most reliable for React apps)
-            const reactKey = Object.keys(target).find(key => key.startsWith('__reactProps$') || key.startsWith('__reactFiber$'));
-            if (reactKey) {
-              let fiber = (target as any)[reactKey];
-              fiber = fiber.return || fiber;
-              while (fiber) {
-                if (fiber.memoizedProps && typeof fiber.memoizedProps.onClick === 'function') {
-                  try {
-                    // Try to trigger the true onClick securely
-                    fiber.memoizedProps.onClick(new MouseEvent('click', { bubbles: true, cancelable: true }));
-                    success = true;
-                  } catch (e) {}
-                  break;
-                }
-                fiber = fiber.return;
-              }
-            }
-
-            // Method 2: Native Element click function
-            if (typeof (target as any).click === 'function') {
-               (target as any).click();
-               success = true;
-            }
-
-            // Method 3: Standard synthetic events
-            const events = ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'];
-            events.forEach(eventType => {
-               target.dispatchEvent(new MouseEvent(eventType, {
-                 bubbles: true, cancelable: true, view: window
-               }));
-            });
-          }
-        });
-        
-        if (success) return;
-      }
-    } else {
-      // Fallback selector for Aliyun chat box container
-      const alternateBtn = document.querySelector(".appflow-chatbot-box");
-      if (alternateBtn instanceof HTMLElement) {
-        alternateBtn.click();
-      }
-    }
   };
 
   return (
@@ -117,29 +56,6 @@ export const FloatingContact = () => {
           onMouseLeave={() => setShowWechat(false)}
         >
           <MessageCircle fill="currentColor" size={24} />
-        </button>
-      </div>
-
-      {/* AI Assistant */}
-      <div className="relative flex items-center group">
-        {showAI && (
-          <div className="absolute right-full mr-4 bg-white px-4 py-2 rounded-lg shadow-lg border border-slate-200 text-slate-800 font-medium whitespace-nowrap animate-in fade-in slide-in-from-right-4 duration-200">
-            AI智能客服
-            <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-t border-r border-slate-200 rotate-45"></div>
-          </div>
-        )}
-        <button
-          className="w-12 h-12 bg-white rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all pointer-events-auto"
-          onMouseEnter={() => setShowAI(true)}
-          onMouseLeave={() => setShowAI(false)}
-          onClick={handleAIClick}
-        >
-          <span
-            className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-tr from-accent to-sunrise"
-            style={{ fontFamily: "ui-sans-serif, system-ui, sans-serif" }}
-          >
-            AI
-          </span>
         </button>
       </div>
     </div>
