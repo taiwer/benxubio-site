@@ -231,7 +231,11 @@
   border-radius: 10px;
 }
 
-/* Hide original Aliyun Appflow Bot Icon */
+/* Hide original Aliyun Appflow Bot Icon but keep it clickable via JS */
 #appflow-chat-container > div:first-child {
-  display: none !important;
+  position: fixed !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  pointer-events: all !important;
+  opacity: 0 !important;
 }

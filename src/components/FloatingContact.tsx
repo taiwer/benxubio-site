@@ -9,11 +9,23 @@ export const FloatingContact = () => {
 
   const handleAIClick = () => {
     // Attempt to click Aliyun's Chat button wrapper or nested element
-    const aliyunBtn = document.querySelector(
-      "#appflow-chat-container > div:first-child",
-    );
-    if (aliyunBtn instanceof HTMLElement) {
-      aliyunBtn.click();
+    const container = document.querySelector("#appflow-chat-container");
+    if (container) {
+      // Try to find the button inside
+      const aliyunBtn = (container.querySelector('div[style*="cursor: grab"]') || 
+                        container.querySelector('div.sc-iveFHj') ||
+                        container.querySelector('div')) as HTMLElement;
+      
+      if (aliyunBtn) {
+        // Dispatch event for more reliable triggering
+        aliyunBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+        // Also call .click() as fallback
+        if (typeof aliyunBtn.click === 'function') aliyunBtn.click();
+        
+        // Try clicking children in case listeners are deeper
+        const img = aliyunBtn.querySelector('img');
+        if (img instanceof HTMLElement) img.click();
+      }
     } else {
       // Fallback selector for Aliyun chat box container
       const alternateBtn = document.querySelector(".appflow-chatbot-box");
@@ -24,7 +36,7 @@ export const FloatingContact = () => {
   };
 
   return (
-    <div className="fixed right-6 bottom-32 z-50 flex flex-col gap-4">
+    <div className="fixed right-6 bottom-32 z-[2147483647] flex flex-col gap-4">
       {/* Phone */}
       <div className="relative flex items-center group">
         {showPhone && (
@@ -34,7 +46,7 @@ export const FloatingContact = () => {
           </div>
         )}
         <button
-          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-accent"
+          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-accent pointer-events-auto"
           onMouseEnter={() => setShowPhone(true)}
           onMouseLeave={() => setShowPhone(false)}
         >
@@ -60,7 +72,7 @@ export const FloatingContact = () => {
           </div>
         )}
         <button
-          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-[#07C160]"
+          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all text-[#07C160] pointer-events-auto"
           onMouseEnter={() => setShowWechat(true)}
           onMouseLeave={() => setShowWechat(false)}
         >
@@ -77,7 +89,7 @@ export const FloatingContact = () => {
           </div>
         )}
         <button
-          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all"
+          className="w-12 h-12 bg-white text-sunrise rounded-full shadow-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:scale-105 transition-all pointer-events-auto"
           onMouseEnter={() => setShowAI(true)}
           onMouseLeave={() => setShowAI(false)}
           onClick={handleAIClick}
