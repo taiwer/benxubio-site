@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
     <script src="https://o.alicdn.com/appflow/chatbot/v1/AppflowChatSDK.js"></script>
-    <script>
-      window.APPFLOW_CHAT_SDK.init({
-        integrateConfig: {
-          integrateId: "cit-8b89d50169d6451c8e77",
-          domain: {
-            requestDomain: "https://1184078924234021.appflow.aliyunnest.com",
-          },
-        },
-      });
-    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener('load', function() {
+        if(window.APPFLOW_CHAT_SDK) {
+          window.APPFLOW_CHAT_SDK.init({
+            integrateConfig: {
+              integrateId: "cit-8b89d50169d6451c8e77",
+              domain: {
+                requestDomain: "https://1184078924234021.appflow.aliyunnest.com",
+              },
+            },
+          });
+        }
+      });
+    </script>
   </body>
 </html>
