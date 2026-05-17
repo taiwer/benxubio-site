@@ -24,7 +24,10 @@ async function startServer() {
       const { name, organization, phone, email, wechat, categories, description } =
         req.body;
 
+      const submitTime = new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
+
       const markdownContent = `**项目需求对接申请**
+> **提交时间**: ${submitTime}
 > **姓名**: ${name}
 > **单位**: ${organization}
 > **电话**: ${phone}
