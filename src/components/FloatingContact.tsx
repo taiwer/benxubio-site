@@ -19,28 +19,51 @@ export const FloatingContact = () => {
     const container = document.querySelector("#appflow-chat-container");
     if (container) {
       // The Aliyun Chat SDK typically injects the launcher as the first child.
-      // The chat popup itself will usually have a class like ChatSDKStyle or be appended later.
       const launcher = container.firstElementChild as HTMLElement;
       
       if (launcher) {
-        // Broadly dispatch events to ensure React synthetic event system catches it
-        const targetElement = launcher.querySelector('button, [role="button"], img, svg') || launcher;
+        // Collect all possible clickable targets including the launcher itself
+        const targets = [launcher, ...Array.from(launcher.querySelectorAll('img, svg, button, div, [role="button"]'))];
+        
+        let success = false;
 
-        const events = ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'];
-        events.forEach(eventType => {
-          targetElement.dispatchEvent(new MouseEvent(eventType, {
-            bubbles: true,
-            cancelable: true,
-            view: window,
-            clientX: 100, // mock coordinates
-            clientY: 100
-          }));
+        targets.forEach(target => {
+          if (target instanceof HTMLElement || target instanceof SVGElement) {
+            // Method 1: React Fiber internal click bypass (most reliable for React apps)
+            const reactKey = Object.keys(target).find(key => key.startsWith('__reactProps$') || key.startsWith('__reactFiber$'));
+            if (reactKey) {
+              let fiber = (target as any)[reactKey];
+              fiber = fiber.return || fiber;
+              while (fiber) {
+                if (fiber.memoizedProps && typeof fiber.memoizedProps.onClick === 'function') {
+                  try {
+                    // Try to trigger the true onClick securely
+                    fiber.memoizedProps.onClick(new MouseEvent('click', { bubbles: true, cancelable: true }));
+                    success = true;
+                  } catch (e) {}
+                  break;
+                }
+                fiber = fiber.return;
+              }
+            }
+
+            // Method 2: Native Element click function
+            if (typeof (target as any).click === 'function') {
+               (target as any).click();
+               success = true;
+            }
+
+            // Method 3: Standard synthetic events
+            const events = ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'];
+            events.forEach(eventType => {
+               target.dispatchEvent(new MouseEvent(eventType, {
+                 bubbles: true, cancelable: true, view: window
+               }));
+            });
+          }
         });
-
-        // Also call element.click() just in case it has a native handler
-        if (typeof (targetElement as any).click === 'function') {
-           (targetElement as any).click();
-        }
+        
+        if (success) return;
       }
     } else {
       // Fallback selector for Aliyun chat box container
